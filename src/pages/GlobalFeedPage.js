@@ -6,6 +6,7 @@ import Pagination from "../components/routing/pagination";
 import PopularTags from "../components/tags/popularTags";
 import Loading from "../components/helpers/loading";
 import ErrorMessages from "../components/helpers/errorMessages";
+import FeedToggler from "../components/feed/feedToggler";
 
 const GlobalFeedPage = () => {
   // todo use
@@ -37,6 +38,8 @@ const GlobalFeedPage = () => {
       <div className={"container"}>
         <div className={"row"}>
           <div className={"col-md-9"} style={{ minWidth: 0 }}>
+            <FeedToggler />
+
             {isLoading && <Loading />}
             {error && <ErrorMessages />}
             {!isLoading && response && (

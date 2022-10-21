@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="ionicons" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/__code.ionicframework.com_ionicons_2.0.1_css_ionicons.css" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/__code.ionicframework.com_ionicons_2.0.1_css_ionicons.css" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
