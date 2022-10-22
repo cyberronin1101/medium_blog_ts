@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 const BASE_URL = "https://conduit.productionready.io/api";
+const BASE_LIMIT = 10;
 
 type optionsType = {
   limit?: number;
@@ -58,5 +59,12 @@ class ApiService {
     return await doFetch(updateUrl("/user"), data);
   };
 }
+
+export const getLimitOffset = (page: number = 1, limit = BASE_LIMIT) => {
+  return {
+    limit,
+    offset: (page - 1) * limit,
+  };
+};
 
 export default new ApiService();
