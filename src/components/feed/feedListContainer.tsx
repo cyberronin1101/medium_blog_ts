@@ -1,32 +1,43 @@
 import useFetch from "../../hooks/useFetch";
-import ApiService, { getLimitOffset } from "../../services/apiService";
+import ApiService from "../../services/apiService";
 import { useEffect, useMemo } from "react";
 import FetchStateContainer from "../helpers/fetchStateContainer";
 import FeedList from "./feedList";
+import Pagination from "../routing/pagination";
+import { respFeedType } from "../../types/apiTypes";
 
 const PopularTagContainer = (props: {
   tag?: string;
-  page?: string;
+  page?: number;
+  url?: string;
 }): JSX.Element => {
-  const { tag, page } = props;
+  const { tag, page, url = "" } = props;
 
   let urlOptions = useMemo(
     () => ({
-      ...getLimitOffset(page),
+      ...ApiService.helperLimitOffset(page),
       ...(tag && { tag }),
     }),
     [tag, page]
   );
 
-  let [fetchState, doFetch] = useFetch<any>(ApiService.getFeed, urlOptions);
+  let [fetchState, doFetch] = useFetch<respFeedType>(
+    ApiService.getFeed,
+    urlOptions
+  );
 
   useEffect(() => {
     doFetch();
   }, [doFetch]);
 
+  const total = fetchState.response?.articlesCount || 0;
+  const current = (page && +page) || 1;
+
+  // todo bad?
   return (
     <FetchStateContainer fetchState={fetchState}>
-      <FeedList data={fetchState.response} />
+      {fetchState.response && <FeedList data={fetchState.response} />}
+      <Pagination total={total} current={current} url={url} />
     </FetchStateContainer>
   );
 };

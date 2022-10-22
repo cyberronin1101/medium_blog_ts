@@ -1,16 +1,35 @@
 import { Link } from "react-router-dom";
+import ApiService from "../../services/apiService";
 
-const PaginationItem = ({ url, idx, current }) => {
+const PaginationItem = ({
+  url,
+  idx,
+  current,
+}: {
+  url: string;
+  idx: number;
+  current: number;
+}) => {
   return (
     <li className={"page-item" + (+current === idx ? " active" : "")}>
-      <Link to={url + "?page=" + idx} className={"page-link"}>
+      <Link to={url + "/" + idx} className={"page-link"}>
         {idx}
       </Link>
     </li>
   );
 };
 
-const Pagination = ({ total, limit, url, current }) => {
+const Pagination = ({
+  total,
+  limit = ApiService.helperBaseLimit(),
+  current,
+  url,
+}: {
+  total: number;
+  limit?: number;
+  current: number;
+  url: string;
+}) => {
   let totalPages = Math.ceil(total / limit);
   let pages = [...Array(totalPages)].map((i, idx) => idx + 1);
 

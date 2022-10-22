@@ -61,13 +61,15 @@ class ApiService {
   getUser: doFetchType = async (options, data) => {
     return await doFetch(updateUrl("/user"), data);
   };
-}
 
-export const getLimitOffset = (page: string = "1", limit = BASE_LIMIT) => {
-  return {
-    limit,
-    offset: (parseInt(page) - 1) * limit,
+  helperBaseLimit = () => BASE_LIMIT;
+
+  helperLimitOffset = (page: number = 1, limit = BASE_LIMIT) => {
+    return {
+      limit,
+      offset: (page - 1) * limit,
+    };
   };
-};
+}
 
 export default new ApiService();

@@ -5,7 +5,9 @@ import { useParams } from "react-router-dom";
 import FeedListContainer from "../../components/feed/feedListContainer";
 
 const TagFeedPage = (): JSX.Element => {
-  let { tag, page } = useParams();
+  const { tag, page } = useParams();
+  const numberPage = (page && +page) || 1;
+  const url = `/tags/${tag}`;
 
   return (
     <div className={"home-page"}>
@@ -21,7 +23,7 @@ const TagFeedPage = (): JSX.Element => {
         <div className={"row"}>
           <div className={"col-md-9"} style={{ minWidth: 0 }}>
             <FeedToggler tagName={tag} />
-            <FeedListContainer tag={tag} page={page} />
+            <FeedListContainer tag={tag} page={numberPage} url={url} />
           </div>
 
           <div className={"col-md-3"}>

@@ -1,26 +1,8 @@
 import React from "react";
+import { respFeedType } from "../../types/apiTypes";
 import FeedListItem from "./feedListItem";
 
-type authorType = {
-  username: string;
-  image: string;
-};
-type feedType = {
-  author: authorType;
-  body: string;
-  title: string;
-  description: string;
-  slug: string;
-  tagList: string[];
-  createdAt: string;
-};
-
-type respType = {
-  articles: feedType[];
-  articlesCount: number;
-};
-
-const FeedList = (props: { data: respType }): JSX.Element => {
+const FeedList = (props: { data: respFeedType }): JSX.Element => {
   let data = props.data;
 
   return (

@@ -3,12 +3,12 @@ import { ReactNode } from "react";
 import Loading from "./loading";
 import ErrorMessage from "./errorMessage";
 
-type testType = {
-  fetchState: useFetchStateType<any>;
+type testType<T> = {
+  fetchState: useFetchStateType<T>;
   children: ReactNode;
 };
 
-const FetchStateContainer = (props: testType) => {
+const FetchStateContainer = <T,>(props: testType<T>) => {
   let { response, loading, error } = props.fetchState;
 
   if (loading || (!error && !response)) {
@@ -19,7 +19,11 @@ const FetchStateContainer = (props: testType) => {
     return <ErrorMessage error={error} />;
   }
 
-  return <div>{props.children}</div>;
+  if (response) {
+    return <div>{props.children}</div>;
+  }
+
+  return null;
 };
 
 export default FetchStateContainer;
