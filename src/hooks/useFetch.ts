@@ -2,10 +2,16 @@ import { useCallback, useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
 import { errorType } from "../components/helpers/errorMessage";
 
-type resultType = [{ response: any; loading: boolean; error: any }, Function];
+type resultType<T> = [
+  { response: T; loading: boolean; error: fetchErrorType },
+  Function
+];
+
 type fetchErrorType = errorType | null;
 
-const useFetch = (doFetchCB: () => Promise<AxiosResponse>): resultType => {
+const useFetch = <T>(
+  doFetchCB: () => Promise<AxiosResponse>
+): resultType<T | null> => {
   let [response, setResponse] = useState(null);
   let [loading, setLoading] = useState(false);
   let [error, setError] = useState<fetchErrorType>(null);
