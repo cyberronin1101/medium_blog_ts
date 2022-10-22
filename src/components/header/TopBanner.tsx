@@ -10,7 +10,7 @@ const TopBanner = ({ title, desc }: propsType): JSX.Element => {
     <div className={"banner"}>
       <div className={"container"}>
         <h1>{title}</h1>
-        {desc && <p>A place to share knowledge</p>}
+        {desc && <p>${desc}</p>}
       </div>
     </div>
   );
