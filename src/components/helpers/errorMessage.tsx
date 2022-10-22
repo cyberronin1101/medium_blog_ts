@@ -1,5 +1,5 @@
 export type errorType = {
-  code: string;
+  code?: string;
   message: string;
 };
 
