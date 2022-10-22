@@ -14,7 +14,7 @@ type doFetchType = (
   data?: Object
 ) => Promise<AxiosResponse>;
 
-const doFetch = async (url: string, data?: Object) => {
+const doFetch = async (url: string, data: Object = {}) => {
   let token = localStorage.getItem("token");
 
   if (token && data) {
