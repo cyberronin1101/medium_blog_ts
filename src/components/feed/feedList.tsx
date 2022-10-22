@@ -1,22 +1,35 @@
-import WithData from "../hoc/withData";
 import React from "react";
+import FeedListItem from "./feedListItem";
 
-type tagType = string;
-
-type respTagType = {
-  tags: tagType[];
+type authorType = {
+  username: string;
+  image: string;
+};
+type feedType = {
+  author: authorType;
+  body: string;
+  title: string;
+  description: string;
+  slug: string;
+  tagList: string[];
+  createdAt: string;
 };
 
-const FeedList = (props: { data: respTagType }): JSX.Element => {
+type respType = {
+  articles: feedType[];
+  articlesCount: number;
+};
+
+const FeedList = (props: { data: respType }): JSX.Element => {
   let data = props.data;
 
   return (
     <div className={""}>
-      {data.tags.map((item, idx) => {
-        return <div key={idx}>{item}</div>;
-      })}
+      {data.articles.map((item, idx) => (
+        <FeedListItem key={idx} article={item} />
+      ))}
     </div>
   );
 };
 
-export default WithData<respTagType>(FeedList);
+export default FeedList;

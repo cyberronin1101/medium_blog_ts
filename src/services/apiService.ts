@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 const BASE_URL = "https://conduit.productionready.io/api";
 const BASE_LIMIT = 10;
 
-type optionsType = {
+export type apiServiceOptionsType = {
   limit?: number;
   offset?: number;
   tag?: string;
@@ -11,7 +11,7 @@ type optionsType = {
 };
 
 type doFetchType = (
-  options?: optionsType,
+  options?: apiServiceOptionsType,
   data?: Object
 ) => Promise<AxiosResponse>;
 
@@ -32,7 +32,10 @@ const doFetch = async (url: string, data: Object = {}) => {
   return await axios(url, data);
 };
 
-const updateUrl = (path: string, urlExtends?: optionsType): string => {
+const updateUrl = (
+  path: string,
+  urlExtends?: apiServiceOptionsType
+): string => {
   if (!urlExtends) {
     return BASE_URL + path;
   }
@@ -60,10 +63,10 @@ class ApiService {
   };
 }
 
-export const getLimitOffset = (page: number = 1, limit = BASE_LIMIT) => {
+export const getLimitOffset = (page: string = "1", limit = BASE_LIMIT) => {
   return {
     limit,
-    offset: (page - 1) * limit,
+    offset: (parseInt(page) - 1) * limit,
   };
 };
 

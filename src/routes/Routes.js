@@ -10,9 +10,9 @@ export default () => {
     <Routes>
       <Route index element={<GlobalFeedPage />} />
 
-      {/*<Route path={"tags"} element={null}>*/}
-      <Route path={"tags/:slug"} element={<TagFeedPage />} />
-      {/*</Route>*/}
+      <Route path={"tags/:tag"} element={<TagFeedPage />}>
+        <Route path={":page"} element={<TagFeedPage />} />
+      </Route>
 
       <Route path={"article"}>
         <Route index element={<ArticlePage />} />

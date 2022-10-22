@@ -2,9 +2,10 @@ import useFetch from "../../hooks/useFetch";
 import { useContext, useEffect } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { CurrentUserContext } from "../../context/currentUser";
+import apiService from "../../services/apiService";
 
 const CurrentUserChecker = ({ children }) => {
-  let [{ response }, auth] = useFetch("/user");
+  let [{ response }, auth] = useFetch(() => apiService.getUser());
   let [token] = useLocalStorage("token");
   let [, setUser] = useContext(CurrentUserContext);
 

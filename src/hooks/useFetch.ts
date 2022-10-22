@@ -1,16 +1,21 @@
 import { useCallback, useState } from "react";
 import { AxiosError, AxiosResponse } from "axios";
 import { errorType } from "../components/helpers/errorMessage";
+import { apiServiceOptionsType } from "../services/apiService";
 
-type resultType<T> = [
-  { response: T; loading: boolean; error: fetchErrorType },
-  Function
-];
+export type useFetchStateType<T> = {
+  response: T;
+  loading: boolean;
+  error: fetchErrorType;
+};
+
+type resultType<T> = [useFetchStateType<T>, Function];
 
 type fetchErrorType = errorType | null;
 
 const useFetch = <T>(
-  doFetchCB: () => Promise<AxiosResponse>
+  doFetchCB: Function,
+  options?: apiServiceOptionsType
 ): resultType<T | null> => {
   let [response, setResponse] = useState(null);
   let [loading, setLoading] = useState(false);
@@ -21,7 +26,7 @@ const useFetch = <T>(
     setLoading(true);
     setError(null);
 
-    doFetchCB()
+    doFetchCB(options)
       .then((res: AxiosResponse) => {
         setLoading(false);
         setResponse(res.data);
@@ -33,7 +38,7 @@ const useFetch = <T>(
           code,
         });
       });
-  }, [doFetchCB]);
+  }, [doFetchCB, options]);
 
   return [{ response, loading, error }, doFetch];
 };

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import WithData from "../hoc/withData";
 
 type tagType = string;
 
@@ -26,4 +25,4 @@ const PopularTags = (props: { data: respTagType }) => {
   );
 };
 
-export default WithData<respTagType>(PopularTags);
+export default PopularTags;
