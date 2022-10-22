@@ -1,22 +1,22 @@
 import WithData from "../hoc/withData";
 import React from "react";
 
-type propsType = {
-  tag?: string | undefined;
-  data: { tags: string[] };
+type tagType = string;
+
+type respTagType = {
+  tags: tagType[];
 };
 
-const FeedList = ({ data }: propsType): JSX.Element => {
-  // console.log(data);
+const FeedList = (props: { data: respTagType }): JSX.Element => {
+  let data = props.data;
 
   return (
-    <div className={"feed-toggle"}>
+    <div className={""}>
       {data.tags.map((item, idx) => {
-        console.log(item);
         return <div key={idx}>{item}</div>;
       })}
     </div>
   );
 };
 
-export default WithData<propsType>(FeedList);
+export default WithData<respTagType>(FeedList);

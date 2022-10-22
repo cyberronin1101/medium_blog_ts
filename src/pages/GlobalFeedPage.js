@@ -3,10 +3,10 @@ import useFetch from "../hooks/useFetch";
 import { useEffect } from "react";
 import Feed from "../components/feed/feed";
 import Pagination from "../components/routing/pagination";
-import PopularTags from "../components/tags/popularTags";
 import Loading from "../components/helpers/loading";
-import ErrorMessages from "../components/helpers/errorMessages";
+import ErrorMessages from "../components/helpers/errorMessage";
 import FeedToggler from "../components/feed/feedToggler";
+import PopularTagsContainer from "../components/tags/popularTagsContainer";
 
 const GlobalFeedPage = () => {
   // todo use
@@ -57,7 +57,7 @@ const GlobalFeedPage = () => {
             )}
           </div>
           <div className={"col-md-3"}>
-            <PopularTags />
+            <PopularTagsContainer />
           </div>
         </div>
       </div>

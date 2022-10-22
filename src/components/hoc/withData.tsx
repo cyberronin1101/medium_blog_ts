@@ -1,28 +1,46 @@
-import React, { Component, useEffect } from "react";
-import useFetch from "../../hooks/useFetch";
+import React, { useEffect, useState } from "react";
+import { AxiosError, AxiosResponse } from "axios";
+import Loading from "../helpers/loading";
+import ErrorMessage, {
+  errorType as errorTypeCommon,
+} from "../helpers/errorMessage";
 
-type propsType = {
-  tag?: string;
-};
+type errorType = errorTypeCommon | null;
 
-const WithData = <T,>(Component: React.FC<T>) => {
-  const Wrapper = (props: propsType) => {
-    const [{ response, loading, error }, doFetch] = useFetch("/tags");
+const WithData = <T,>(Component: React.FC<{ data: T }>) => {
+  const Wrapper = (props: { getData: () => Promise<AxiosResponse<T>> }) => {
+    let { getData } = props;
+
+    let [response, setResponse] = useState<AxiosResponse<T> | null>(null);
+    let [loading, setLoading] = useState(false);
+    let [error, setError] = useState<errorType>(null);
 
     useEffect(() => {
-      doFetch();
-    }, [doFetch]);
+      setResponse(null);
+      setLoading(true);
+      setError(null);
+
+      getData()
+        .then((response: AxiosResponse<T>) => {
+          setResponse(response);
+          setLoading(false);
+        })
+        .catch((error: AxiosError) => {
+          setError(error as errorType);
+          setLoading(false);
+        });
+    }, [getData]);
 
     if (loading) {
-      return <div>Loading...</div>;
+      return <Loading />;
     }
 
     if (error) {
-      return <div>{error.message}</div>;
+      return <ErrorMessage error={error} />;
     }
 
     if (response) {
-      return <Component {...(props as T)} data={response} />;
+      return <Component data={response.data} />;
     }
 
     return null;
