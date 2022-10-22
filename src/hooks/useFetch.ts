@@ -1,57 +1,35 @@
 import { useCallback, useState } from "react";
-import useLocalStorage from "./useLocalStorage";
-import axios from "axios";
-
-const BASE_URL = "https://conduit.productionready.io/api";
-
-type fetchOptionsType = {};
+import { AxiosError, AxiosResponse } from "axios";
+import { errorType } from "../components/helpers/errorMessage";
 
 type resultType = [{ response: any; loading: boolean; error: any }, Function];
+type fetchErrorType = errorType | null;
 
-const useFetch = (url: string): resultType => {
+const useFetch = (doFetchCB: () => Promise<AxiosResponse>): resultType => {
   let [response, setResponse] = useState(null);
   let [loading, setLoading] = useState(false);
-  let [error, setError] = useState(false);
+  let [error, setError] = useState<fetchErrorType>(null);
 
-  let [token] = useLocalStorage("token");
+  let doFetch = useCallback(() => {
+    setResponse(null);
+    setLoading(true);
+    setError(null);
 
-  let doFetch = useCallback(
-    (options: fetchOptionsType = {}) => {
-      setResponse(null);
-      setLoading(true);
-      setError(false);
-
-      options = applyTokenToOptions(token, options);
-
-      axios(BASE_URL + url, options)
-        .then((res) => {
-          setLoading(false);
-          setResponse(res.data);
-        })
-        .catch((err) => {
-          setLoading(false);
-          setError(err);
+    doFetchCB()
+      .then((res: AxiosResponse) => {
+        setLoading(false);
+        setResponse(res.data);
+      })
+      .catch(({ message, code }: AxiosError) => {
+        setLoading(false);
+        setError({
+          message,
+          code,
         });
-    },
-    [token, url]
-  );
+      });
+  }, [doFetchCB]);
 
   return [{ response, loading, error }, doFetch];
 };
 
 export default useFetch;
-
-let applyTokenToOptions = (token: string, options: object): object => {
-  if (!token) {
-    return options;
-  }
-
-  return {
-    ...options,
-    ...{
-      headers: {
-        authorization: `Token ${token}`,
-      },
-    },
-  };
-};
