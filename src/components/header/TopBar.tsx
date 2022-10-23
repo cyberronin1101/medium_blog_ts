@@ -18,7 +18,7 @@ const TopBar = () => {
             </NavLink>
           </li>
 
-          {currentUser.isLoggedIn === false && (
+          {!currentUser.isLoggedIn && (
             <>
               <li className={"nav-item"}>
                 <NavLink to={"/login"} className={"nav-link"}>
@@ -32,7 +32,7 @@ const TopBar = () => {
               </li>
             </>
           )}
-          {currentUser.isLoggedIn && (
+          {currentUser.isLoggedIn && currentUser.currentUser && (
             <>
               <li className={"nav-item"}>
                 <NavLink to={"/articles/new"} className={"nav-link"}>

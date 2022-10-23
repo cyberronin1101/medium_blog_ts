@@ -22,7 +22,7 @@ const useFetch = <T>(
   let [error, setError] = useState<fetchErrorType>(null);
 
   let doFetch = useCallback(
-    (data = null) => {
+    (data = {}) => {
       setResponse(null);
       setLoading(true);
       setError(null);

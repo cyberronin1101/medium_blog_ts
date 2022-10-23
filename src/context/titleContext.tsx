@@ -3,6 +3,10 @@ import { createContext, Dispatch, ReactNode, useState } from "react";
 type titleType = {
   title?: ReactNode;
   description?: ReactNode;
+  meta?: {
+    user?: { username: string; image: string };
+    date?: string;
+  };
 };
 
 type propsType = [titleType, Dispatch<titleType>];

@@ -1,5 +1,8 @@
 import { useContext, useEffect } from "react";
-import { CurrentUserContext } from "../context/currentUserContext";
+import {
+  CurrentUserContext,
+  userContextActions,
+} from "../context/currentUserContext";
 import { userType } from "../types/apiTypes";
 import useLocalStorage from "./useLocalStorage";
 
@@ -15,7 +18,7 @@ const useOnLogin = (response: { user: userType } | null) => {
     let user = response.user;
 
     user.token && setToken(user.token);
-    setCurrentUser({ isLogin: false, isLoggedIn: true, currentUser: user });
+    setCurrentUser({ type: userContextActions.SET_AUTHORIZED, payload: user });
   }, [response, setCurrentUser, setToken]);
 };
 

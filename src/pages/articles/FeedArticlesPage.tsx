@@ -27,7 +27,7 @@ const FeedArticlesPage = (): JSX.Element => {
   return (
     <Fragment>
       <FeedToggler />
-      <FeedListContainer page={numberPage} url={"/feed"} your={true} />
+      <FeedListContainer page={numberPage} url={"/feed"} feed={true} />
     </Fragment>
   );
 };

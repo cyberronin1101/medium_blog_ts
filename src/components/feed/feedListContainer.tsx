@@ -10,7 +10,7 @@ const PopularTagContainer = (props: {
   tag?: string;
   page?: number;
   url?: string;
-  your?: boolean;
+  feed?: boolean;
 }): JSX.Element => {
   const { tag, page, url = "" } = props;
 
@@ -22,7 +22,7 @@ const PopularTagContainer = (props: {
     [tag, page]
   );
 
-  let self = props.your ? ApiService.getFeed : ApiService.getArticles;
+  let self = props.feed ? ApiService.getFeed : ApiService.getArticles;
   let [fetchState, doFetch] = useFetch<respFeedType>(self, urlOptions);
 
   useEffect(() => {

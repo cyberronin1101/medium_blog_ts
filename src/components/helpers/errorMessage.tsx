@@ -1,8 +1,8 @@
-import {AxiosResponse} from 'axios';
+import { AxiosResponse } from "axios";
 
 export type errorType = {
   code?: string;
-  response?: AxiosResponse
+  response?: AxiosResponse;
   message: string;
 };
 
@@ -17,7 +17,7 @@ const ErrorMessage = (props: { error?: errorType }) => {
   }
 
   return (
-    <ul className={"error-messages"}>
+    <ul className={"error-messages"} style={{ margin: "10px 0" }}>
       <li>{message}</li>
     </ul>
   );

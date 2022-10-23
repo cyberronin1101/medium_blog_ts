@@ -5,7 +5,7 @@ import { CurrentUserContext } from "../../context/currentUserContext";
 const HeaderUserPanel = () => {
   let [currentUser] = useContext(CurrentUserContext);
 
-  if (currentUser.isLoggedIn === false) {
+  if (!currentUser.isLoggedIn) {
     return (
       <>
         <li className={"nav-item"}>

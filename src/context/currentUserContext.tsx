@@ -1,31 +1,64 @@
-import { createContext, Dispatch, ReactNode, useState } from "react";
+import React, {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  useReducer,
+} from "react";
+import { userType } from "../types/apiTypes";
 
-type userType = {
-  isLogin?: boolean;
-  isLoggedIn?: boolean | null;
-  currentUser: Object | null;
+export enum userContextActions {
+  LOADING = "LOADING",
+  SET_AUTHORIZED = "SET_AUTHORIZED",
+  SET_UNAUTHORIZED = "SET_UNAUTHORIZED",
+}
+
+type actionType = {
+  type: userContextActions;
+  payload?: any;
 };
 
-type propsType = [userType, Dispatch<userType>];
+type userContextType = {
+  isLoading: boolean;
+  isLoggedIn: boolean;
+  currentUser: userType | null;
+};
 
-export const CurrentUserContext = createContext<propsType>([
-  {
-    isLogin: false,
-    isLoggedIn: null,
-    currentUser: null,
-  },
-  () => {},
-]);
+const initialState = {
+  isLoading: false,
+  isLoggedIn: false,
+  currentUser: null,
+};
 
-export const CurrentUserProvider = ({ children }: { children: ReactNode }) => {
-  let [state, setState] = useState<userType>({
-    isLogin: false,
-    isLoggedIn: null,
-    currentUser: null,
-  });
+let currentUserReducer = (state: userContextType, action: actionType) => {
+  switch (action.type) {
+    case "LOADING":
+      return { ...state, isLoading: true };
+    case "SET_AUTHORIZED":
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        currentUser: action.payload as userType,
+      };
+    case "SET_UNAUTHORIZED":
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export const CurrentUserContext = createContext<
+  [userContextType, Dispatch<actionType>]
+>([initialState, () => {}]);
+
+export const CurrentUserProvider = ({ children }: PropsWithChildren) => {
+  let value = useReducer(currentUserReducer, initialState);
 
   return (
-    <CurrentUserContext.Provider value={[state, setState]}>
+    <CurrentUserContext.Provider value={value}>
       {children}
     </CurrentUserContext.Provider>
   );

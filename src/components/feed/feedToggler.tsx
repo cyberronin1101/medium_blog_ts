@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
+import { CurrentUserContext } from "../../context/currentUserContext";
 
 type propsType = {
   tagName?: string;
@@ -21,10 +22,14 @@ const TogglerItem = ({ children, to }: itemPropsType): JSX.Element => {
 };
 
 const FeedToggler = ({ tagName }: propsType): JSX.Element => {
+  const [currentUser] = useContext(CurrentUserContext);
+
   return (
     <div className={"feed-toggle"}>
       <ul className={"nav nav-pills outline-active"}>
-        <TogglerItem to={"/feed"}>You feed</TogglerItem>
+        {currentUser.isLoggedIn && (
+          <TogglerItem to={"/feed"}>You feed</TogglerItem>
+        )}
         <TogglerItem to={"/articles"}>Global feed</TogglerItem>
         {tagName && (
           <TogglerItem to={`/tags/${tagName}`}>

@@ -1,12 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import TopBar from "./components/header/TopBar";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import CurrentUserChecker from "./components/user/currentUserChecker";
 import RootProvider from "./context/rootProvider";
 import TopBanner from "./components/header/TopBanner";
 import Main from "./components/page/main";
 import PageRoutes from "./routes/pageRoutes";
+
+// КОСТЫЛИ!!!
+const Wrapper = ({ children }) => {
+  let { pathname } = useLocation();
+
+  let isArticle = pathname.includes("/article/");
+  return (
+    <div className={isArticle ? "article-page" : "home-page"}>{children}</div>
+  );
+};
 
 const App = () => {
   return (
@@ -15,12 +25,13 @@ const App = () => {
         <Router>
           <TopBar />
 
-          <div className={"home-page"}>
+          <Wrapper>
             <TopBanner />
+
             <Main>
               <PageRoutes />
             </Main>
-          </div>
+          </Wrapper>
         </Router>
       </CurrentUserChecker>
     </RootProvider>

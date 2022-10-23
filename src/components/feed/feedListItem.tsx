@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import TagList from "../tags/tagList";
 
 type authorType = {
   username: string;
@@ -46,13 +47,7 @@ const FeedListItem = (props: { article: feedType }) => {
         </h1>
         <p>{article.description}</p>
         <span>Read more...</span>
-        <ul className={"tag-list"}>
-          {article.tagList.map((tag) => (
-            <li key={tag} className={"tag-default tag-pill tag-outline"}>
-              {tag}
-            </li>
-          ))}
-        </ul>
+        <TagList tagList={article.tagList} />
       </Link>
     </div>
   );

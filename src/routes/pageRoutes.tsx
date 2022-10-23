@@ -7,6 +7,7 @@ import SignInPage from "../pages/auth/signInPage";
 import SignUpPage from "../pages/auth/signUpPage";
 import ArticlesPage from "../pages/articles/ArticlesPage";
 import FeedArticlesPage from "../pages/articles/FeedArticlesPage";
+import ArticlePage from "../pages/articles/ArticlePage";
 
 const PageRoutes = () => {
   return (
@@ -16,6 +17,8 @@ const PageRoutes = () => {
       <Route path={"/articles"} element={<ArticlesPage />}>
         <Route path={":page"} element={<ArticlesPage />} />
       </Route>
+
+      <Route path={"/article/:slug"} element={<ArticlePage />} />
 
       <Route path={"feed"} element={<FeedArticlesPage />}>
         <Route path={":page"} element={<FeedArticlesPage />} />

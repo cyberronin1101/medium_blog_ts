@@ -1,11 +1,14 @@
 import { Navigate, useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { CurrentUserContext } from "../../context/currentUserContext";
+import {
+  CurrentUserContext,
+  userContextActions,
+} from "../../context/currentUserContext";
 import { CurrentTitleContext } from "../../context/titleContext";
 
 const Auth = () => {
-  let [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+  let [, dispatchCurrentUser] = useContext(CurrentUserContext);
   let [token, setToken] = useLocalStorage("token");
   let { username } = useParams();
 
@@ -26,11 +29,13 @@ const Auth = () => {
     <div>
       <button
         onClick={() => {
-          setCurrentUser({
-            isLogin: false,
-            isLoggedIn: false,
-            currentUser: null,
-          });
+          // setCurrentUser({
+          //   isLogin: false,
+          //   isLoggedIn: false,
+          //   currentUser: null,
+          // });
+
+          dispatchCurrentUser({ type: userContextActions.SET_UNAUTHORIZED });
           setToken("");
         }}
       >

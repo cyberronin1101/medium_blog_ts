@@ -60,12 +60,17 @@ class ApiService {
     return await doFetch(updateUrl(path, options));
   };
 
+  getArticle: doFetchType = async (options, slug) => {
+    let path = "/articles/" + slug;
+    return await doFetch(updateUrl(path, options));
+  };
+
   getFeed: doFetchType = async (options) => {
     let path = "/articles/feed";
     return await doFetch(updateUrl(path, options));
   };
 
-  getUser: doFetchType = async (options, data) => {
+  getUser: doFetchType = async (options, data = {}) => {
     return await doFetch(updateUrl("/user"), data);
   };
 
