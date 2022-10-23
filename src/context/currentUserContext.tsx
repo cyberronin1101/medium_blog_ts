@@ -1,9 +1,24 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, Dispatch, ReactNode, useState } from "react";
 
-export const CurrentUserContext = createContext([{}, () => {}]);
+type userType = {
+  isLogin?: boolean;
+  isLoggedIn?: boolean | null;
+  currentUser: Object | null;
+};
+
+type propsType = [userType, Dispatch<userType>];
+
+export const CurrentUserContext = createContext<propsType>([
+  {
+    isLogin: false,
+    isLoggedIn: null,
+    currentUser: null,
+  },
+  () => {},
+]);
 
 export const CurrentUserProvider = ({ children }: { children: ReactNode }) => {
-  let [state, setState] = useState({
+  let [state, setState] = useState<userType>({
     isLogin: false,
     isLoggedIn: null,
     currentUser: null,

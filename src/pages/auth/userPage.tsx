@@ -5,7 +5,7 @@ import { CurrentUserContext } from "../../context/currentUserContext";
 import { CurrentTitleContext } from "../../context/titleContext";
 
 const Auth = () => {
-  let [currentUser] = useContext(CurrentUserContext);
+  let [currentUser, setCurrentUser] = useContext(CurrentUserContext);
   let [token, setToken] = useLocalStorage("token");
   let { username } = useParams();
 
@@ -18,17 +18,24 @@ const Auth = () => {
     });
   }, [setTitle, username]);
 
-  console.log(currentUser);
-  console.log(username);
-  console.log(token);
-
   if (!token) {
     return <Navigate to={"/"} />;
   }
 
   return (
     <div>
-      <button onClick={() => setToken("")}>Logout</button>
+      <button
+        onClick={() => {
+          setCurrentUser({
+            isLogin: false,
+            isLoggedIn: false,
+            currentUser: null,
+          });
+          setToken("");
+        }}
+      >
+        Logout
+      </button>
     </div>
   );
 };

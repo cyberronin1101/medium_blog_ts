@@ -1,15 +1,26 @@
+import {AxiosResponse} from 'axios';
+
 export type errorType = {
   code?: string;
+  response?: AxiosResponse
   message: string;
 };
 
 const ErrorMessage = (props: { error?: errorType }) => {
-  let { error } = props;
-  if (error) {
-    return <div>{error.message}</div>;
+  const { error } = props;
+
+  console.log(error);
+  let message = "Something went wrong";
+
+  if (error?.message) {
+    message = error.message;
   }
 
-  return <div>Something went wrong</div>;
+  return (
+    <ul className={"error-messages"}>
+      <li>{message}</li>
+    </ul>
+  );
 };
 
 export default ErrorMessage;

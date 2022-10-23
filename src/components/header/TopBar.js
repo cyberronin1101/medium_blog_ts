@@ -5,8 +5,6 @@ import { CurrentUserContext } from "../../context/currentUserContext";
 const TopBar = () => {
   let [currentUser] = useContext(CurrentUserContext);
 
-  console.log(currentUser);
-
   return (
     <nav className={"navbar navbar-light"}>
       <div className={"container"}>
@@ -19,6 +17,7 @@ const TopBar = () => {
               Home
             </NavLink>
           </li>
+
           {currentUser.isLoggedIn === false && (
             <>
               <li className={"nav-item"}>

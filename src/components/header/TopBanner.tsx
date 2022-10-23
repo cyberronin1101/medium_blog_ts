@@ -1,8 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentTitleContext } from "../../context/titleContext";
 
 const TopBanner = (): JSX.Element => {
-  let [{ title, description }] = useContext(CurrentTitleContext);
+  let [{ title, description }, set] = useContext(CurrentTitleContext);
+
+  useEffect(() => {});
 
   return (
     <div className={"banner"}>

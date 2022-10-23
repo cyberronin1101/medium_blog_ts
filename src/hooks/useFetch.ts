@@ -21,24 +21,28 @@ const useFetch = <T>(
   let [loading, setLoading] = useState(false);
   let [error, setError] = useState<fetchErrorType>(null);
 
-  let doFetch = useCallback(() => {
-    setResponse(null);
-    setLoading(true);
-    setError(null);
+  let doFetch = useCallback(
+    (data = null) => {
+      setResponse(null);
+      setLoading(true);
+      setError(null);
 
-    doFetchCB(options)
-      .then((res: AxiosResponse) => {
-        setLoading(false);
-        setResponse(res.data);
-      })
-      .catch(({ message, code }: AxiosError) => {
-        setLoading(false);
-        setError({
-          message,
-          code,
+      doFetchCB(options, data)
+        .then((res: AxiosResponse) => {
+          setLoading(false);
+          setResponse(res.data);
+        })
+        .catch(({ message, code, response }: AxiosError) => {
+          setLoading(false);
+          setError({
+            message,
+            code,
+            response,
+          });
         });
-      });
-  }, [doFetchCB, options]);
+    },
+    [doFetchCB, options]
+  );
 
   return [{ response, loading, error }, doFetch];
 };

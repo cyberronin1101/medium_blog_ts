@@ -12,7 +12,9 @@ export type apiServiceOptionsType = {
 
 type doFetchType = (
   options?: apiServiceOptionsType,
-  data?: Object
+  data?: {
+    method?: "post" | "get";
+  } & Object
 ) => Promise<AxiosResponse>;
 
 const doFetch = async (url: string, data: Object = {}) => {
@@ -60,6 +62,16 @@ class ApiService {
 
   getUser: doFetchType = async (options, data) => {
     return await doFetch(updateUrl("/user"), data);
+  };
+
+  signIn: doFetchType = async (options, data = {}) => {
+    data.method = "post";
+    return await doFetch(updateUrl("/users/login"), data);
+  };
+
+  signUp: doFetchType = async (options, data = {}) => {
+    data.method = "post";
+    return await doFetch(updateUrl("/users"), data);
   };
 
   helperBaseLimit = () => BASE_LIMIT;

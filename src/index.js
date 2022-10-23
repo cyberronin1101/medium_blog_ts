@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Routes from "./routes/Routes";
 import TopBar from "./components/header/TopBar";
 import { BrowserRouter as Router } from "react-router-dom";
 import CurrentUserChecker from "./components/user/currentUserChecker";
 import RootProvider from "./context/rootProvider";
 import TopBanner from "./components/header/TopBanner";
 import Main from "./components/page/main";
+import PageRoutes from "./routes/pageRoutes";
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
           <div className={"home-page"}>
             <TopBanner />
             <Main>
-              <Routes />
+              <PageRoutes />
             </Main>
           </div>
         </Router>
