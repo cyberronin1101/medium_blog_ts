@@ -1,16 +1,14 @@
-import { ReactNode } from "react";
+import { useContext } from "react";
+import { CurrentTitleContext } from "../../context/titleContext";
 
-type propsType = {
-  title: ReactNode;
-  desc?: ReactNode;
-};
+const TopBanner = (): JSX.Element => {
+  let [{ title, description }] = useContext(CurrentTitleContext);
 
-const TopBanner = ({ title, desc }: propsType): JSX.Element => {
   return (
     <div className={"banner"}>
       <div className={"container"}>
         <h1>{title}</h1>
-        {desc && <p>${desc}</p>}
+        {description && <p>{description}</p>}
       </div>
     </div>
   );

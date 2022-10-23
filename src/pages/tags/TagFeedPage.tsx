@@ -1,29 +1,32 @@
-import TopBanner from "../../components/header/TopBanner";
 import FeedToggler from "../../components/feed/feedToggler";
 import { useParams } from "react-router-dom";
 import FeedListContainer from "../../components/feed/feedListContainer";
-import Main from "../../components/page/main";
+import { Fragment, useContext, useEffect } from "react";
+import { CurrentTitleContext } from "../../context/titleContext";
 
 const TagFeedPage = (): JSX.Element => {
   const { tag, page } = useParams();
   const numberPage = (page && +page) || 1;
   const url = `/tags/${tag}`;
 
-  return (
-    <div className={"home-page"}>
-      <TopBanner
-        title={
-          <>
-            <i className={"ion-pound"}></i> {tag}
-          </>
-        }
-      />
+  let [, setTitle] = useContext(CurrentTitleContext);
 
-      <Main>
-        <FeedToggler tagName={tag} />
-        <FeedListContainer tag={tag} page={numberPage} url={url} />
-      </Main>
-    </div>
+  useEffect(() => {
+    setTitle({
+      title: (
+        <>
+          <i className={"ion-pound"}></i> {tag}
+        </>
+      ),
+      description: "i'm a description",
+    });
+  }, [setTitle, tag]);
+
+  return (
+    <Fragment>
+      <FeedToggler tagName={tag} />
+      <FeedListContainer tag={tag} page={numberPage} url={url} />
+    </Fragment>
   );
 };
 

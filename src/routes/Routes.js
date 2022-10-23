@@ -4,6 +4,7 @@ import ArticlePage from "../pages/ArticlePage";
 import React from "react";
 import Auth from "../pages/auth/Auth";
 import TagFeedPage from "../pages/tags/TagFeedPage";
+import UserPage from "../pages/auth/userPage";
 
 export default () => {
   return (
@@ -17,6 +18,10 @@ export default () => {
       <Route path={"article"}>
         <Route index element={<ArticlePage />} />
         <Route path={":articleId"} element={<ArticlePage />} />
+      </Route>
+
+      <Route path={"profiles"}>
+        <Route path={":username"} element={<UserPage />} />
       </Route>
 
       <Route path={"login"} element={<Auth />} />

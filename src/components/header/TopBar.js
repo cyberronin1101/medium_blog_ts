@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
-import { CurrentUserContext } from "../../context/currentUser";
+import { CurrentUserContext } from "../../context/currentUserContext";
 
 const TopBar = () => {
   let [currentUser] = useContext(CurrentUserContext);

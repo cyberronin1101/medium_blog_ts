@@ -1,8 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 export const CurrentUserContext = createContext([{}, () => {}]);
 
-export const CurrentUserProvider = ({ children }) => {
+export const CurrentUserProvider = ({ children }: { children: ReactNode }) => {
   let [state, setState] = useState({
     isLogin: false,
     isLoggedIn: null,

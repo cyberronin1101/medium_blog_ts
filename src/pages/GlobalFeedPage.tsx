@@ -1,18 +1,23 @@
 import FeedToggler from "../components/feed/feedToggler";
-import TopBanner from "../components/header/TopBanner";
 import FeedListContainer from "../components/feed/feedListContainer";
-import Main from "../components/page/main";
+import { Fragment, useContext, useEffect } from "react";
+import { CurrentTitleContext } from "../context/titleContext";
 
 const GlobalFeedPage = () => {
-  return (
-    <div className={"home-page"}>
-      <TopBanner title={"Medium clone"} desc={"A place to share knowledge"} />
+  let [, setTitle] = useContext(CurrentTitleContext);
 
-      <Main>
-        <FeedToggler />
-        <FeedListContainer url={"/articles"} />
-      </Main>
-    </div>
+  useEffect(() => {
+    setTitle({
+      title: "Medium clone",
+      description: "A place to share knowledge",
+    });
+  }, [setTitle]);
+
+  return (
+    <Fragment>
+      <FeedToggler />
+      <FeedListContainer url={"/articles"} />
+    </Fragment>
   );
 };
 

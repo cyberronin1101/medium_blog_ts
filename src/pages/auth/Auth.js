@@ -3,7 +3,7 @@ import useInput from "../../hooks/useInput";
 import { useContext, useEffect, useRef } from "react";
 import useFetch from "../../hooks/useFetch";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { CurrentUserContext } from "../../context/currentUser";
+import { CurrentUserContext } from "../../context/currentUserContext";
 import BackendErrorMessages from "../../components/error/BackendErrorMessages";
 
 const Auth = () => {

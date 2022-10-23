@@ -1,7 +1,7 @@
 import useFetch from "../../hooks/useFetch";
 import { useContext, useEffect } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { CurrentUserContext } from "../../context/currentUser";
+import { CurrentUserContext } from "../../context/currentUserContext";
 import apiService from "../../services/apiService";
 
 const CurrentUserChecker = ({ children }) => {
