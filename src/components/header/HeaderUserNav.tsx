@@ -24,8 +24,8 @@ const HeaderUserNav = () => {
       {currentUser.isLoggedIn && currentUser.currentUser && (
         <>
           <li className={"nav-item"}>
-            <NavLink to={"/articles/new"} className={"nav-link"}>
-              <i className={"ion-compose"}></i>&nbsp;New post
+            <NavLink to={"/article/new"} className={"nav-link"}>
+              <i className={"ion-compose"}></i>&nbsp;New Article
             </NavLink>
           </li>
           <li className={"nav-item"}>

@@ -2,7 +2,7 @@ import useFetch from "../../hooks/useFetch";
 import ApiService from "../../services/apiService";
 import { useEffect, useMemo } from "react";
 import FetchStateContainer from "../helpers/fetchStateContainer";
-import FeedList from "./feedList";
+import ArticleList from "./articleList";
 import Pagination from "../routing/pagination";
 import { respFeedType } from "../../types/apiTypes";
 
@@ -35,7 +35,7 @@ const PopularTagContainer = (props: {
   // todo bad?
   return (
     <FetchStateContainer fetchState={fetchState}>
-      {fetchState.response && <FeedList data={fetchState.response} />}
+      {fetchState.response && <ArticleList data={fetchState.response} />}
       <Pagination total={total} current={current} url={url} />
     </FetchStateContainer>
   );

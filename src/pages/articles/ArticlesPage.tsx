@@ -2,8 +2,8 @@ import { Fragment, useContext, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import { CurrentTitleContext } from "../../context/titleContext";
-import FeedToggler from "../../components/feed/feedToggler";
-import FeedListContainer from "../../components/feed/feedListContainer";
+import ArticleToggler from "../../components/article/articleToggler";
+import FeedListContainer from "../../components/article/articleListContainer";
 
 const ArticlesPage = () => {
   const [, setTitle] = useContext(CurrentTitleContext);
@@ -20,7 +20,7 @@ const ArticlesPage = () => {
 
   return (
     <Fragment>
-      <FeedToggler />
+      <ArticleToggler />
       <FeedListContainer url={"/articles"} page={numberPage} />
     </Fragment>
   );

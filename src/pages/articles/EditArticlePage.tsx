@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 
-import { useParams } from "react-router-dom";
 import { CurrentTitleContext } from "../../context/titleContext";
 import useFetch from "../../hooks/useFetch";
 import apiService from "../../services/apiService";
@@ -9,37 +8,22 @@ import ErrorMessage from "../../components/helpers/errorMessage";
 import { articleType } from "../../types/apiTypes";
 import TagList from "../../components/tags/tagList";
 
-const ArticlePage = () => {
+const EditArticlePage = () => {
   const [, setTitle] = useContext(CurrentTitleContext);
-  const { slug } = useParams();
-  const [{ response, loading, error }, doFetch] = useFetch<{
+
+  const [{ response, loading, error }] = useFetch<{
     article: articleType;
   }>(apiService.getArticle);
 
   useEffect(() => {
-    doFetch(slug);
-  }, [doFetch, slug]);
-
-  useEffect(() => {
     setTitle({
-      title: "",
+      title: "New Article",
     });
   }, [setTitle]);
 
   useEffect(() => {
     if (!response) return () => {};
-
-    setTitle({
-      title: response.article.title,
-      meta: {
-        user: {
-          username: response.article.author.username,
-          image: response.article.author.image,
-        },
-        date: response.article.createdAt,
-      },
-    });
-  }, [response, setTitle]);
+  }, [response]);
 
   if (loading) {
     return <Loading />;
@@ -63,4 +47,4 @@ const ArticlePage = () => {
   return null;
 };
 
-export default ArticlePage;
+export default EditArticlePage;

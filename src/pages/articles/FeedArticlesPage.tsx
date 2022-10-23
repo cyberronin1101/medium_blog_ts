@@ -1,6 +1,6 @@
-import FeedToggler from "../../components/feed/feedToggler";
+import ArticleToggler from "../../components/article/articleToggler";
 import { Navigate, useParams } from "react-router-dom";
-import FeedListContainer from "../../components/feed/feedListContainer";
+import FeedListContainer from "../../components/article/articleListContainer";
 import { Fragment, useContext, useEffect } from "react";
 import { CurrentTitleContext } from "../../context/titleContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -26,7 +26,7 @@ const FeedArticlesPage = (): JSX.Element => {
 
   return (
     <Fragment>
-      <FeedToggler />
+      <ArticleToggler />
       <FeedListContainer page={numberPage} url={"/feed"} feed={true} />
     </Fragment>
   );

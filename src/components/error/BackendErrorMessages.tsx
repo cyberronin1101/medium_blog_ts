@@ -1,8 +1,6 @@
-const BackendErrorMessages = ({
-  errors,
-}: {
-  errors: { [key: string]: string[] };
-}) => {
+import { backendErrorsType } from "../../types/apiTypes";
+
+const BackendErrorMessages = ({ errors }: backendErrorsType) => {
   return (
     <ul className={"error-messages"}>
       {Object.keys(errors).map((name, idx) => {

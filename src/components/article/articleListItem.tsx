@@ -15,7 +15,7 @@ type feedType = {
   createdAt: string;
 };
 
-const FeedListItem = (props: { article: feedType }) => {
+const ArticleListItem = (props: { article: feedType }) => {
   const { article } = props;
 
   return (
@@ -53,4 +53,4 @@ const FeedListItem = (props: { article: feedType }) => {
   );
 };
 
-export default FeedListItem;
+export default ArticleListItem;

@@ -21,7 +21,7 @@ const TogglerItem = ({ children, to }: itemPropsType): JSX.Element => {
   );
 };
 
-const FeedToggler = ({ tagName }: propsType): JSX.Element => {
+const ArticleToggler = ({ tagName }: propsType): JSX.Element => {
   const [currentUser] = useContext(CurrentUserContext);
 
   return (
@@ -41,4 +41,4 @@ const FeedToggler = ({ tagName }: propsType): JSX.Element => {
   );
 };
 
-export default FeedToggler;
+export default ArticleToggler;

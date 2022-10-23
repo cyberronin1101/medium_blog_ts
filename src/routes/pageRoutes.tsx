@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-// import ArticlePage from "../pages/ArticlePage";
 import React from "react";
 import TagArticlesPage from "../pages/articles/TagArticlesPage";
 import UserPage from "../pages/auth/userPage";
@@ -8,6 +7,8 @@ import SignUpPage from "../pages/auth/signUpPage";
 import ArticlesPage from "../pages/articles/ArticlesPage";
 import FeedArticlesPage from "../pages/articles/FeedArticlesPage";
 import ArticlePage from "../pages/articles/ArticlePage";
+import NewArticlePage from "../pages/articles/NewArticlePage";
+import EditArticlePage from "../pages/articles/EditArticlePage";
 
 const PageRoutes = () => {
   return (
@@ -18,7 +19,11 @@ const PageRoutes = () => {
         <Route path={":page"} element={<ArticlesPage />} />
       </Route>
 
-      <Route path={"/article/:slug"} element={<ArticlePage />} />
+      <Route path={"/article"}>
+        <Route path={"new"} element={<NewArticlePage />} />
+        <Route path={"edit/:slug"} element={<EditArticlePage />} />
+        <Route path={":slug"} element={<ArticlePage />} />
+      </Route>
 
       <Route path={"feed"} element={<FeedArticlesPage />}>
         <Route path={":page"} element={<FeedArticlesPage />} />

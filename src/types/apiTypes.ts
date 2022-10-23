@@ -1,3 +1,7 @@
+export type backendErrorsType = {
+  errors: { [key: string]: string[] };
+};
+
 export type authorType = {
   username: string;
   image: string;
@@ -11,7 +15,7 @@ export type userType = {
   username: string;
 };
 
-export type feedType = {
+export type articleType = {
   author: authorType;
   body: string;
   title: string;
@@ -21,7 +25,14 @@ export type feedType = {
   createdAt: string;
 };
 
+export type articleTypeEdit = {
+  body?: string;
+  title?: string;
+  description?: string;
+  tagList?: string[];
+};
+
 export type respFeedType = {
-  articles: feedType[];
+  articles: articleType[];
   articlesCount: number;
 };
