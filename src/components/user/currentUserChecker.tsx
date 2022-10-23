@@ -1,5 +1,5 @@
 import useFetch from "../../hooks/useFetch";
-import { PropsWithChildren, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import {
   CurrentUserContext,
@@ -8,7 +8,7 @@ import {
 import apiService from "../../services/apiService";
 import { userType } from "../../types/apiTypes";
 
-const CurrentUserChecker = ({ children }: PropsWithChildren) => {
+const CurrentUserChecker = ({ children }: { children: JSX.Element }) => {
   let [{ response }, getUser] = useFetch<{ user: userType }>(
     apiService.getUser
   );

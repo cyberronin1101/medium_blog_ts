@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import ReactDOM from "react-dom/client";
 import TopBar from "./components/header/TopBar";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
@@ -9,7 +9,7 @@ import Main from "./components/page/main";
 import PageRoutes from "./routes/pageRoutes";
 
 // КОСТЫЛИ!!!
-const Wrapper = ({ children }) => {
+const Wrapper = ({ children }: PropsWithChildren) => {
   let { pathname } = useLocation();
 
   let isArticle = pathname.includes("/article/");
@@ -38,4 +38,5 @@ const App = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+let root = document.getElementById("root");
+root && ReactDOM.createRoot(root).render(<App />);
