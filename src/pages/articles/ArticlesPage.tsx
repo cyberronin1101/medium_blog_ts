@@ -1,10 +1,11 @@
-import FeedToggler from "../components/feed/feedToggler";
-import FeedListContainer from "../components/feed/feedListContainer";
 import { Fragment, useContext, useEffect } from "react";
-import { CurrentTitleContext } from "../context/titleContext";
-import { useParams } from "react-router-dom";
 
-const GlobalFeedPage = () => {
+import { useParams } from "react-router-dom";
+import { CurrentTitleContext } from "../../context/titleContext";
+import FeedToggler from "../../components/feed/feedToggler";
+import FeedListContainer from "../../components/feed/feedListContainer";
+
+const ArticlesPage = () => {
   let [, setTitle] = useContext(CurrentTitleContext);
 
   const { page } = useParams();
@@ -20,9 +21,9 @@ const GlobalFeedPage = () => {
   return (
     <Fragment>
       <FeedToggler />
-      <FeedListContainer url={""} page={numberPage} />
+      <FeedListContainer url={"/articles"} page={numberPage} />
     </Fragment>
   );
 };
 
-export default GlobalFeedPage;
+export default ArticlesPage;

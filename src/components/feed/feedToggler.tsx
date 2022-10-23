@@ -13,7 +13,7 @@ type itemPropsType = {
 const TogglerItem = ({ children, to }: itemPropsType): JSX.Element => {
   return (
     <li className={"nav-item"}>
-      <NavLink to={to} end className={"nav-link"}>
+      <NavLink to={to} end={to === "/"} className={"nav-link"}>
         {children}
       </NavLink>
     </li>
@@ -25,7 +25,7 @@ const FeedToggler = ({ tagName }: propsType): JSX.Element => {
     <div className={"feed-toggle"}>
       <ul className={"nav nav-pills outline-active"}>
         <TogglerItem to={"/feed"}>You feed</TogglerItem>
-        <TogglerItem to={"/"}>Global feed</TogglerItem>
+        <TogglerItem to={"/articles"}>Global feed</TogglerItem>
         {tagName && (
           <TogglerItem to={`/tags/${tagName}`}>
             <i className={"ion-pound"}></i> {tagName}

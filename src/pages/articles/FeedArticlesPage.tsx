@@ -1,33 +1,35 @@
 import FeedToggler from "../../components/feed/feedToggler";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import FeedListContainer from "../../components/feed/feedListContainer";
 import { Fragment, useContext, useEffect } from "react";
 import { CurrentTitleContext } from "../../context/titleContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
-const TagFeedPage = (): JSX.Element => {
-  const { tag, page } = useParams();
+const FeedArticlesPage = (): JSX.Element => {
+  const { page } = useParams();
   const numberPage = (page && +page) || 1;
-  const url = `/tags/${tag}`;
 
   let [, setTitle] = useContext(CurrentTitleContext);
 
   useEffect(() => {
     setTitle({
-      title: (
-        <>
-          <i className={"ion-pound"}></i> {tag}
-        </>
-      ),
+      title: "Your feeds",
       description: "i'm a description",
     });
-  }, [setTitle, tag]);
+  }, [setTitle]);
+
+  const [token] = useLocalStorage("token");
+
+  if (!token) {
+    return <Navigate to={"/login"} />;
+  }
 
   return (
     <Fragment>
-      <FeedToggler tagName={tag} />
-      <FeedListContainer tag={tag} page={numberPage} url={url} />
+      <FeedToggler />
+      <FeedListContainer page={numberPage} url={"/feed"} your={true} />
     </Fragment>
   );
 };
 
-export default TagFeedPage;
+export default FeedArticlesPage;
