@@ -1,4 +1,4 @@
-let BackendErrorMessages = ({
+const BackendErrorMessages = ({
   errors,
 }: {
   errors: { [key: string]: string[] };

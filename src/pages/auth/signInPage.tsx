@@ -11,18 +11,18 @@ import ErrorMessage from "../../components/helpers/errorMessage";
 import useOnLogin from "../../hooks/useOnLogin";
 
 const SignInPage = () => {
-  let emailInput = useInput();
-  let passwordInput = useInput();
+  const emailInput = useInput();
+  const passwordInput = useInput();
 
-  let [currentUser] = useContext(CurrentUserContext);
+  const [currentUser] = useContext(CurrentUserContext);
 
-  let [{ response, loading, error }, auth] = useFetch<{ user: userType }>(
+  const [{ response, loading, error }, auth] = useFetch<{ user: userType }>(
     apiService.signIn
   );
 
-  let inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  let [, setTitle] = useContext(CurrentTitleContext);
+  const [, setTitle] = useContext(CurrentTitleContext);
 
   useEffect(() => {
     setTitle({
@@ -36,10 +36,10 @@ const SignInPage = () => {
 
   useOnLogin(response);
 
-  let handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    let user = {
+    const user = {
       email: emailInput.value,
       password: passwordInput.value,
     };

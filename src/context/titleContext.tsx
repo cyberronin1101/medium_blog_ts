@@ -19,7 +19,7 @@ export const CurrentTitleProvider = ({ children }: { children: ReactNode }) => {
     description: "A place to share knowledge",
   };
 
-  let [state, setState] = useState<titleType>(defaultValue);
+  const [state, setState] = useState<titleType>(defaultValue);
 
   return (
     <CurrentTitleContext.Provider value={[state, setState]}>

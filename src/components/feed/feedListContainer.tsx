@@ -14,7 +14,7 @@ const PopularTagContainer = (props: {
 }): JSX.Element => {
   const { tag, page, url = "" } = props;
 
-  let urlOptions = useMemo(
+  const urlOptions = useMemo(
     () => ({
       ...ApiService.helperLimitOffset(page),
       ...(tag && { tag }),
@@ -22,8 +22,8 @@ const PopularTagContainer = (props: {
     [tag, page]
   );
 
-  let self = props.feed ? ApiService.getFeed : ApiService.getArticles;
-  let [fetchState, doFetch] = useFetch<respFeedType>(self, urlOptions);
+  const self = props.feed ? ApiService.getFeed : ApiService.getArticles;
+  const [fetchState, doFetch] = useFetch<respFeedType>(self, urlOptions);
 
   useEffect(() => {
     doFetch();

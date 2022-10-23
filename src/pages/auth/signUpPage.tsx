@@ -11,19 +11,19 @@ import { userType } from "../../types/apiTypes";
 import useOnLogin from "../../hooks/useOnLogin";
 
 const SignUpPage = () => {
-  let usernameInput = useInput();
-  let emailInput = useInput();
-  let passwordInput = useInput();
+  const usernameInput = useInput();
+  const emailInput = useInput();
+  const passwordInput = useInput();
 
-  let [currentUser] = useContext(CurrentUserContext);
+  const [currentUser] = useContext(CurrentUserContext);
 
-  let [{ response, loading, error }, auth] = useFetch<{ user: userType }>(
+  const [{ response, loading, error }, auth] = useFetch<{ user: userType }>(
     apiService.signUp
   );
 
-  let inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  let [, setTitle] = useContext(CurrentTitleContext);
+  const [, setTitle] = useContext(CurrentTitleContext);
 
   useEffect(() => {
     setTitle({
@@ -37,10 +37,10 @@ const SignUpPage = () => {
 
   useOnLogin(response);
 
-  let handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    let user = {
+    const user = {
       email: emailInput.value,
       password: passwordInput.value,
       username: usernameInput.value,

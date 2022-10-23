@@ -8,11 +8,11 @@ import {
 import { CurrentTitleContext } from "../../context/titleContext";
 
 const Auth = () => {
-  let [, dispatchCurrentUser] = useContext(CurrentUserContext);
-  let [token, setToken] = useLocalStorage("token");
-  let { username } = useParams();
+  const [, dispatchCurrentUser] = useContext(CurrentUserContext);
+  const [token, setToken] = useLocalStorage("token");
+  const { username } = useParams();
 
-  let [, setTitle] = useContext(CurrentTitleContext);
+  const [, setTitle] = useContext(CurrentTitleContext);
 
   useEffect(() => {
     setTitle({

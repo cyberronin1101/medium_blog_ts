@@ -5,7 +5,7 @@ import { CurrentTitleContext } from "../context/titleContext";
 import { useParams } from "react-router-dom";
 
 const GlobalFeedPage = () => {
-  let [, setTitle] = useContext(CurrentTitleContext);
+  const [, setTitle] = useContext(CurrentTitleContext);
 
   const { page } = useParams();
   const numberPage = (page && +page) || 1;

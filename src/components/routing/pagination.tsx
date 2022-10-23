@@ -30,8 +30,8 @@ const Pagination = ({
   current: number;
   url: string;
 }) => {
-  let totalPages = Math.ceil(total / limit);
-  let pages = [...Array(totalPages)].map((i, idx) => idx + 1);
+  const totalPages = Math.ceil(total / limit);
+  const pages = [...Array(totalPages)].map((i, idx) => idx + 1);
 
   return (
     <ul className={"pagination"}>

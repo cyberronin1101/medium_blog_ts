@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../../context/currentUserContext";
 
 const HeaderUserPanel = () => {
-  let [currentUser] = useContext(CurrentUserContext);
+  const [currentUser] = useContext(CurrentUserContext);
 
   if (!currentUser.isLoggedIn) {
     return (
@@ -24,7 +24,7 @@ const HeaderUserPanel = () => {
 
   // if (currentUser.isLoggedIn) {
   //
-  //   let user = currentUser.currentUser;
+  //   const user = currentUser.currentUser;
   //   return (
   //     <>
   //       <li className={"nav-item"}>

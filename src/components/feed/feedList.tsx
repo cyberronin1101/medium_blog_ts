@@ -3,7 +3,7 @@ import { respFeedType } from "../../types/apiTypes";
 import FeedListItem from "./feedListItem";
 
 const FeedList = (props: { data: respFeedType }): JSX.Element => {
-  let data = props.data;
+  const data = props.data;
 
   return (
     <div className={""}>

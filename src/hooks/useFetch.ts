@@ -17,11 +17,11 @@ const useFetch = <T>(
   doFetchCB: Function,
   options?: apiServiceOptionsType
 ): resultType<T | null> => {
-  let [response, setResponse] = useState(null);
-  let [loading, setLoading] = useState(false);
-  let [error, setError] = useState<fetchErrorType>(null);
+  const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<fetchErrorType>(null);
 
-  let doFetch = useCallback(
+  const doFetch = useCallback(
     (data = {}) => {
       setResponse(null);
       setLoading(true);

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CurrentTitleContext } from "../../context/titleContext";
 
 const TopBanner = (): JSX.Element => {
-  let [{ title, description, meta }] = useContext(CurrentTitleContext);
+  const [{ title, description, meta }] = useContext(CurrentTitleContext);
 
   useEffect(() => {});
 

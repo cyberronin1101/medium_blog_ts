@@ -18,7 +18,7 @@ type doFetchType = (
 ) => Promise<AxiosResponse>;
 
 const doFetch = async (url: string, data: Object = {}) => {
-  let token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   if (token && data) {
     data = {
@@ -51,22 +51,22 @@ const updateUrl = (
 
 class ApiService {
   getTag: doFetchType = async () => {
-    let path = "/tags";
+    const path = "/tags";
     return await doFetch(updateUrl(path));
   };
 
   getArticles: doFetchType = async (options) => {
-    let path = "/articles";
+    const path = "/articles";
     return await doFetch(updateUrl(path, options));
   };
 
   getArticle: doFetchType = async (options, slug) => {
-    let path = "/articles/" + slug;
+    const path = "/articles/" + slug;
     return await doFetch(updateUrl(path, options));
   };
 
   getFeed: doFetchType = async (options) => {
-    let path = "/articles/feed";
+    const path = "/articles/feed";
     return await doFetch(updateUrl(path, options));
   };
 

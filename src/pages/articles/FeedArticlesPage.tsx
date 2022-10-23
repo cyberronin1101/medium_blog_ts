@@ -9,7 +9,7 @@ const FeedArticlesPage = (): JSX.Element => {
   const { page } = useParams();
   const numberPage = (page && +page) || 1;
 
-  let [, setTitle] = useContext(CurrentTitleContext);
+  const [, setTitle] = useContext(CurrentTitleContext);
 
   useEffect(() => {
     setTitle({

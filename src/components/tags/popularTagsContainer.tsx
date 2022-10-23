@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import FetchStateContainer from "../helpers/fetchStateContainer";
 
 const PopularTagContainer = (): JSX.Element => {
-  let [fetchState, doFetch] = useFetch<any>(ApiService.getTag);
+  const [fetchState, doFetch] = useFetch<any>(ApiService.getTag);
 
   useEffect(() => {
     doFetch();

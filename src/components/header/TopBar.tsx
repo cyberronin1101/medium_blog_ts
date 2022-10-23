@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../../context/currentUserContext";
 
 const TopBar = () => {
-  let [currentUser] = useContext(CurrentUserContext);
+  const [currentUser] = useContext(CurrentUserContext);
 
   return (
     <nav className={"navbar navbar-light"}>

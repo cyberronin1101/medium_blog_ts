@@ -29,7 +29,7 @@ const initialState = {
   currentUser: null,
 };
 
-let currentUserReducer = (state: userContextType, action: actionType) => {
+const currentUserReducer = (state: userContextType, action: actionType) => {
   switch (action.type) {
     case "LOADING":
       return { ...state, isLoading: true };
@@ -55,7 +55,7 @@ export const CurrentUserContext = createContext<
 >([initialState, () => {}]);
 
 export const CurrentUserProvider = ({ children }: PropsWithChildren) => {
-  let value = useReducer(currentUserReducer, initialState);
+  const value = useReducer(currentUserReducer, initialState);
 
   return (
     <CurrentUserContext.Provider value={value}>

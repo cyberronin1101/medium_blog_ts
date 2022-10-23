@@ -9,7 +9,7 @@ const TagArticlesPage = (): JSX.Element => {
   const numberPage = (page && +page) || 1;
   const url = `/tags/${tag}`;
 
-  let [, setTitle] = useContext(CurrentTitleContext);
+  const [, setTitle] = useContext(CurrentTitleContext);
 
   useEffect(() => {
     setTitle({

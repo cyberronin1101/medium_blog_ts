@@ -9,7 +9,7 @@ type testType<T> = {
 };
 
 const FetchStateContainer = <T,>(props: testType<T>) => {
-  let { response, loading, error } = props.fetchState;
+  const { response, loading, error } = props.fetchState;
 
   if (loading || (!error && !response)) {
     return <Loading />;

@@ -10,9 +10,9 @@ import PageRoutes from "./routes/pageRoutes";
 
 // КОСТЫЛИ!!!
 const Wrapper = ({ children }: PropsWithChildren) => {
-  let { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-  let isArticle = pathname.includes("/article/");
+  const isArticle = pathname.includes("/article/");
   return (
     <div className={isArticle ? "article-page" : "home-page"}>{children}</div>
   );
@@ -38,5 +38,5 @@ const App = () => {
   );
 };
 
-let root = document.getElementById("root");
+const root = document.getElementById("root");
 root && ReactDOM.createRoot(root).render(<App />);

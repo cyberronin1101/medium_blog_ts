@@ -6,7 +6,7 @@ import FeedToggler from "../../components/feed/feedToggler";
 import FeedListContainer from "../../components/feed/feedListContainer";
 
 const ArticlesPage = () => {
-  let [, setTitle] = useContext(CurrentTitleContext);
+  const [, setTitle] = useContext(CurrentTitleContext);
 
   const { page } = useParams();
   const numberPage = (page && +page) || 1;

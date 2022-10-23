@@ -9,13 +9,13 @@ import apiService from "../../services/apiService";
 import { userType } from "../../types/apiTypes";
 
 const CurrentUserChecker = ({ children }: { children: JSX.Element }) => {
-  let [{ response }, getUser] = useFetch<{ user: userType }>(
+  const [{ response }, getUser] = useFetch<{ user: userType }>(
     apiService.getUser
   );
 
-  let [token] = useLocalStorage("token");
+  const [token] = useLocalStorage("token");
 
-  let [, setUser] = useContext(CurrentUserContext);
+  const [, setUser] = useContext(CurrentUserContext);
 
   useEffect(() => {
     if (!token) {
