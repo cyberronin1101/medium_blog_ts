@@ -6,7 +6,7 @@ import { CurrentTitleContext } from "../../context/titleContext";
 
 const Auth = () => {
   let [currentUser] = useContext(CurrentUserContext);
-  let [token] = useLocalStorage("token");
+  let [token, setToken] = useLocalStorage("token");
   let { username } = useParams();
 
   let [, setTitle] = useContext(CurrentTitleContext);
@@ -26,7 +26,11 @@ const Auth = () => {
     return <Navigate to={"/"} />;
   }
 
-  return <div>username</div>;
+  return (
+    <div>
+      <button onClick={() => setToken("")}>Logout</button>
+    </div>
+  );
 };
 
 export default Auth;

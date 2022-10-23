@@ -5,6 +5,8 @@ import { CurrentUserContext } from "../../context/currentUserContext";
 const TopBar = () => {
   let [currentUser] = useContext(CurrentUserContext);
 
+  console.log(currentUser);
+
   return (
     <nav className={"navbar navbar-light"}>
       <div className={"container"}>
