@@ -16,10 +16,9 @@ const PageRoutes = () => {
         <Route path={":page"} element={<TagFeedPage />} />
       </Route>
 
-      {/*<Route path={"article"}>*/}
-      {/*  <Route index element={<ArticlePage />} />*/}
-      {/*  <Route path={":articleId"} element={<ArticlePage />} />*/}
-      {/*</Route>*/}
+      <Route path={"articles"}>
+        <Route path={":page"} element={<GlobalFeedPage />} />
+      </Route>
 
       <Route path={"profiles"}>
         <Route path={":username"} element={<UserPage />} />
