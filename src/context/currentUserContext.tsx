@@ -24,7 +24,7 @@ type userContextType = {
 };
 
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   isLoggedIn: false,
   currentUser: null,
 };
@@ -43,7 +43,9 @@ const currentUserReducer = (state: userContextType, action: actionType) => {
     case "SET_UNAUTHORIZED":
       return {
         ...state,
+        isLoading: false,
         isLoggedIn: false,
+        currentUser: null,
       };
     default:
       return state;
