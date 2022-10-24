@@ -1,15 +1,18 @@
 import React from "react";
-import { respFeedType } from "../../types/apiTypes";
+
 import ArticleListItem from "./articleListItem";
+import { apiArticleType } from "../../services/apiService/apiServiceTypes";
 
-const ArticleList = (props: { data: respFeedType }): JSX.Element => {
-  const data = props.data;
-
+const ArticleList = ({
+  data = [],
+}: {
+  data: apiArticleType[] | undefined;
+}): JSX.Element => {
   return (
     <div className={""}>
-      {data.articles.map((item, idx) => (
-        <ArticleListItem key={idx} article={item} />
-      ))}
+      {data.map((item, idx) => {
+        return <ArticleListItem key={idx} article={item} />;
+      })}
     </div>
   );
 };

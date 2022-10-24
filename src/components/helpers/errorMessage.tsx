@@ -1,15 +1,8 @@
-import { AxiosResponse } from "axios";
+import { apiErrorType } from "../../services/apiService/apiServiceTypes";
 
-export type errorType = {
-  code?: string;
-  response?: AxiosResponse;
-  message: string;
-};
-
-const ErrorMessage = (props: { error?: errorType }) => {
+const ErrorMessage = (props: { error?: apiErrorType }) => {
   const { error } = props;
 
-  console.log(error);
   let message = "Something went wrong";
 
   if (error?.message) {

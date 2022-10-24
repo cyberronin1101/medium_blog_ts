@@ -4,7 +4,7 @@ import React, {
   PropsWithChildren,
   useReducer,
 } from "react";
-import { userType } from "../types/apiTypes";
+import { apiUserType } from "../services/apiService/apiServiceTypes";
 
 export enum userContextActions {
   LOADING = "LOADING",
@@ -14,13 +14,13 @@ export enum userContextActions {
 
 type actionType = {
   type: userContextActions;
-  payload?: any;
+  payload?: any; // todo
 };
 
 type userContextType = {
   isLoading: boolean;
   isLoggedIn: boolean;
-  currentUser: userType | null;
+  currentUser: apiUserType | null;
 };
 
 const initialState = {
@@ -28,8 +28,12 @@ const initialState = {
   isLoggedIn: false,
   currentUser: null,
 };
+type currentUserReducerType = (
+  state: userContextType,
+  action: actionType
+) => userContextType;
 
-const currentUserReducer = (state: userContextType, action: actionType) => {
+const currentUserReducer: currentUserReducerType = (state, action) => {
   switch (action.type) {
     case "LOADING":
       return { ...state, isLoading: true };
@@ -38,7 +42,7 @@ const currentUserReducer = (state: userContextType, action: actionType) => {
         ...state,
         isLoading: false,
         isLoggedIn: true,
-        currentUser: action.payload as userType,
+        currentUser: action.payload,
       };
     case "SET_UNAUTHORIZED":
       return {

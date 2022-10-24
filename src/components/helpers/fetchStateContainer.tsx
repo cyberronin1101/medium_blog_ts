@@ -1,10 +1,15 @@
 import Loading from "./loading";
 import ErrorMessage from "./errorMessage";
 import { ReactNode } from "react";
+import { apiErrorType } from "../../services/apiService/apiServiceTypes";
 
 const FetchStateContainer = <T,>(props: {
-  children: ReactNode;
-  fetchState: { response: T | null; loading: boolean; error: any }; // todo errr
+  children: ReactNode | null;
+  fetchState: {
+    response: T | null;
+    loading: boolean;
+    error: apiErrorType | null;
+  };
 }) => {
   const { response, loading, error } = props.fetchState;
 

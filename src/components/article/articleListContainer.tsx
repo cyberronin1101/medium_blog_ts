@@ -32,11 +32,11 @@ const PopularTagContainer = (props: {
 
   const total = fetchState.response?.articlesCount || 0;
   const current = (page && +page) || 1;
+  const data = fetchState.response?.articles;
 
-  // todo bad?
   return (
     <FetchStateContainer fetchState={fetchState}>
-      {fetchState.response && <ArticleList data={fetchState.response} />}
+      <ArticleList data={data} />
       <Pagination total={total} current={current} url={url} />
     </FetchStateContainer>
   );

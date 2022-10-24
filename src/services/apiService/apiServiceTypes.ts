@@ -1,5 +1,15 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 
+export type apiErrorType = {
+  code?: string;
+  response?: AxiosResponse;
+  message: string;
+};
+
+export type apiBackendErrorsType = {
+  errors: { [key: string]: string[] };
+};
+
 export type apiUserSignInType = {
   user: {
     email: string;

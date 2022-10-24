@@ -1,17 +1,20 @@
-import { articleTypeEdit, backendErrorsType } from "../../types/apiTypes";
 import React, { FormEvent, useEffect, useRef } from "react";
 import useInput from "../../hooks/useInput";
 import BackendErrorMessages from "../error/BackendErrorMessages";
+import {
+  apiBackendErrorsType,
+  apiEditArticleType,
+} from "../../services/apiService/apiServiceTypes";
 
 const ArticleForm = ({
   onSubmit = () => {},
   errors = {},
-  initialValue = {},
+  initialValue = {} as apiEditArticleType,
   submitTitle = "",
 }: {
   onSubmit: Function;
-  errors?: backendErrorsType["errors"];
-  initialValue?: articleTypeEdit;
+  errors?: apiBackendErrorsType["errors"];
+  initialValue?: apiEditArticleType;
   submitTitle?: string;
 }) => {
   const titleInput = useInput(initialValue.title);

@@ -3,10 +3,11 @@ import {
   CurrentUserContext,
   userContextActions,
 } from "../context/currentUserContext";
-import { userType } from "../types/apiTypes";
-import useLocalStorage from "./useLocalStorage";
 
-const useOnLogin = (response: { user: userType } | null) => {
+import useLocalStorage from "./useLocalStorage";
+import { apiUserType } from "../services/apiService/apiServiceTypes";
+
+const useOnLogin = (response: { user: apiUserType } | null) => {
   const [, setCurrentUser] = useContext(CurrentUserContext);
   const [, setToken] = useLocalStorage("token");
 

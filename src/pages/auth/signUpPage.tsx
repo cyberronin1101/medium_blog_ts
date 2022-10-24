@@ -34,6 +34,8 @@ const SignUpPage = () => {
 
   useOnLogin(response);
 
+  console.log(error);
+
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
