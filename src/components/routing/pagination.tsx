@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ApiService from "../../services/apiService";
+import ApiService from "../../services/apiService/apiService";
 
 const PaginationItem = ({
   url,

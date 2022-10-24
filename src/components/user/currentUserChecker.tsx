@@ -1,17 +1,15 @@
-import useFetch from "../../hooks/useFetch";
 import { useContext, useEffect } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import {
   CurrentUserContext,
   userContextActions,
 } from "../../context/currentUserContext";
-import apiService from "../../services/apiService";
-import { userType } from "../../types/apiTypes";
+
+import ApiService from "../../services/apiService/apiService";
+import { useFetch } from "../../hooks/useFetch";
 
 const CurrentUserChecker = ({ children }: { children: JSX.Element }) => {
-  const [{ response }, getUser] = useFetch<{ user: userType }>(
-    apiService.getUser
-  );
+  const [{ response }, getUser] = useFetch(ApiService.getUser);
 
   const [token] = useLocalStorage("token");
 

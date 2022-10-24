@@ -1,17 +1,12 @@
 import { Link } from "react-router-dom";
+import { apiTagType } from "../../services/apiService/apiServiceTypes";
 
-type tagType = string;
-
-type respTagType = {
-  tags: tagType[];
-};
-
-const PopularTags = (props: { data: respTagType }) => {
+const PopularTags = ({ tags = [] }: { tags?: apiTagType[] }) => {
   return (
     <div className={"sidebar"}>
       <p>Popular Tags</p>
       <div className={"tag-list"}>
-        {props.data.tags.map((tag) => (
+        {tags.map((tag) => (
           <Link
             key={tag}
             to={"/tags/" + tag}

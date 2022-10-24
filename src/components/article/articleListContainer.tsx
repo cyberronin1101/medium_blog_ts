@@ -1,10 +1,9 @@
-import useFetch from "../../hooks/useFetch";
-import ApiService from "../../services/apiService";
 import { useEffect, useMemo } from "react";
 import FetchStateContainer from "../helpers/fetchStateContainer";
 import ArticleList from "./articleList";
 import Pagination from "../routing/pagination";
-import { respFeedType } from "../../types/apiTypes";
+import ApiService from "../../services/apiService/apiService";
+import { useFetch } from "../../hooks/useFetch";
 
 const PopularTagContainer = (props: {
   tag?: string;
@@ -22,12 +21,14 @@ const PopularTagContainer = (props: {
     [tag, page]
   );
 
-  const self = props.feed ? ApiService.getFeed : ApiService.getArticles;
-  const [fetchState, doFetch] = useFetch<respFeedType>(self, urlOptions);
+  const params = ApiService.helperObjToParams(urlOptions);
+
+  const self = props.feed ? ApiService.getFeedArticles : ApiService.getArticles;
+  const [fetchState, doFetch] = useFetch(self);
 
   useEffect(() => {
-    doFetch();
-  }, [doFetch]);
+    doFetch(params);
+  }, [doFetch, params]);
 
   const total = fetchState.response?.articlesCount || 0;
   const current = (page && +page) || 1;

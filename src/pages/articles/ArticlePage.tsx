@@ -2,22 +2,22 @@ import { useContext, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import { CurrentTitleContext } from "../../context/titleContext";
-import useFetch from "../../hooks/useFetch";
-import apiService from "../../services/apiService";
+
 import Loading from "../../components/helpers/loading";
 import ErrorMessage from "../../components/helpers/errorMessage";
-import { articleType } from "../../types/apiTypes";
 import TagList from "../../components/tags/tagList";
+import { useFetch } from "../../hooks/useFetch";
+import apiService from "../../services/apiService/apiService";
 
 const ArticlePage = () => {
   const [, setTitle] = useContext(CurrentTitleContext);
   const { slug } = useParams();
-  const [{ response, loading, error }, doFetch] = useFetch<{
-    article: articleType;
-  }>(apiService.getArticle);
+  const [{ response, loading, error }, doFetch] = useFetch(
+    apiService.getArticle
+  );
 
   useEffect(() => {
-    doFetch(slug);
+    slug && doFetch(slug);
   }, [doFetch, slug]);
 
   useEffect(() => {

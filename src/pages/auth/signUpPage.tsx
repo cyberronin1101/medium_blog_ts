@@ -2,13 +2,12 @@ import React, { SyntheticEvent, useContext, useEffect, useRef } from "react";
 import { CurrentTitleContext } from "../../context/titleContext";
 import { Link, Navigate } from "react-router-dom";
 import useInput from "../../hooks/useInput";
-import useFetch from "../../hooks/useFetch";
-import apiService from "../../services/apiService";
 import ErrorMessage from "../../components/helpers/errorMessage";
 import BackendErrorMessages from "../../components/error/BackendErrorMessages";
 import { CurrentUserContext } from "../../context/currentUserContext";
-import { userType } from "../../types/apiTypes";
 import useOnLogin from "../../hooks/useOnLogin";
+import { useFetch } from "../../hooks/useFetch";
+import apiService from "../../services/apiService/apiService";
 
 const SignUpPage = () => {
   const usernameInput = useInput();
@@ -17,9 +16,7 @@ const SignUpPage = () => {
 
   const [currentUser] = useContext(CurrentUserContext);
 
-  const [{ response, loading, error }, auth] = useFetch<{ user: userType }>(
-    apiService.signUp
-  );
+  const [{ response, loading, error }, auth] = useFetch(apiService.signUp);
 
   const inputRef = useRef<HTMLInputElement>(null);
 

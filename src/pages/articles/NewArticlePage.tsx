@@ -1,9 +1,14 @@
 import { useContext, useEffect } from "react";
 import { CurrentTitleContext } from "../../context/titleContext";
 import ArticleForm from "../../components/article/articleForm";
+import { useFetch } from "../../hooks/useFetch";
+import ApiService from "../../services/apiService/apiService";
 
 const NewArticlePage = () => {
   const [, setTitle] = useContext(CurrentTitleContext);
+  const [{ response, loading, error }, doFetch] = useFetch(
+    ApiService.createArticle
+  );
 
   useEffect(() => {
     setTitle({
@@ -11,7 +16,11 @@ const NewArticlePage = () => {
     });
   }, [setTitle]);
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    // doFetch({
+    //   data: {},
+    // } as { data: articleTypeEdit });
+  };
 
   const errors = {};
 

@@ -8,7 +8,7 @@ import ArticlesPage from "../pages/articles/ArticlesPage";
 import FeedArticlesPage from "../pages/articles/FeedArticlesPage";
 import ArticlePage from "../pages/articles/ArticlePage";
 import NewArticlePage from "../pages/articles/NewArticlePage";
-import EditArticlePage from "../pages/articles/EditArticlePage";
+// import EditArticlePage from "../pages/articles/EditArticlePage";
 
 const PageRoutes = () => {
   return (
@@ -21,7 +21,7 @@ const PageRoutes = () => {
 
       <Route path={"/article"}>
         <Route path={"new"} element={<NewArticlePage />} />
-        <Route path={"edit/:slug"} element={<EditArticlePage />} />
+        {/*<Route path={"edit/:slug"} element={<EditArticlePage />} />*/}
         <Route path={":slug"} element={<ArticlePage />} />
       </Route>
 

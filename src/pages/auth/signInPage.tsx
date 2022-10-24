@@ -1,14 +1,13 @@
 import useInput from "../../hooks/useInput";
 import React, { SyntheticEvent, useContext, useEffect, useRef } from "react";
 import { CurrentUserContext } from "../../context/currentUserContext";
-import useFetch from "../../hooks/useFetch";
-import { userType } from "../../types/apiTypes";
-import apiService from "../../services/apiService";
 import { CurrentTitleContext } from "../../context/titleContext";
 import { Link, Navigate } from "react-router-dom";
 import BackendErrorMessages from "../../components/error/BackendErrorMessages";
 import ErrorMessage from "../../components/helpers/errorMessage";
 import useOnLogin from "../../hooks/useOnLogin";
+import { useFetch } from "../../hooks/useFetch";
+import apiService from "../../services/apiService/apiService";
 
 const SignInPage = () => {
   const emailInput = useInput();
@@ -16,9 +15,7 @@ const SignInPage = () => {
 
   const [currentUser] = useContext(CurrentUserContext);
 
-  const [{ response, loading, error }, auth] = useFetch<{ user: userType }>(
-    apiService.signIn
-  );
+  const [{ response, loading, error }, auth] = useFetch(apiService.signIn);
 
   const inputRef = useRef<HTMLInputElement>(null);
 

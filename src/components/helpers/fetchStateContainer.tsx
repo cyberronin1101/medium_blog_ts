@@ -1,14 +1,11 @@
-import { useFetchStateType } from "../../hooks/useFetch";
-import { ReactNode } from "react";
 import Loading from "./loading";
 import ErrorMessage from "./errorMessage";
+import { ReactNode } from "react";
 
-type testType<T> = {
-  fetchState: useFetchStateType<T>;
+const FetchStateContainer = <T,>(props: {
   children: ReactNode;
-};
-
-const FetchStateContainer = <T,>(props: testType<T>) => {
+  fetchState: { response: T | null; loading: boolean; error: any }; // todo errr
+}) => {
   const { response, loading, error } = props.fetchState;
 
   if (loading || (!error && !response)) {

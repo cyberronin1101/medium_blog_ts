@@ -1,11 +1,14 @@
 import PopularTags from "./popularTags";
-import useFetch from "../../hooks/useFetch";
-import ApiService from "../../services/apiService";
+
 import { useEffect } from "react";
 import FetchStateContainer from "../helpers/fetchStateContainer";
+import { useFetch } from "../../hooks/useFetch";
+import ApiService from "../../services/apiService/apiService";
 
 const PopularTagContainer = (): JSX.Element => {
-  const [fetchState, doFetch] = useFetch<any>(ApiService.getTag);
+  const [fetchState, doFetch] = useFetch(ApiService.getTag);
+
+  let tags = fetchState.response?.tags;
 
   useEffect(() => {
     doFetch();
@@ -13,7 +16,7 @@ const PopularTagContainer = (): JSX.Element => {
 
   return (
     <FetchStateContainer fetchState={fetchState}>
-      <PopularTags data={fetchState.response} />
+      <PopularTags tags={tags} />
     </FetchStateContainer>
   );
 };
