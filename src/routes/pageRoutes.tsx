@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import React, { useContext } from "react";
+import React from "react";
 import TagArticlesPage from "../pages/articles/TagArticlesPage";
 import UserPage from "../pages/auth/userPage";
 import SignInPage from "../pages/auth/signInPage";
@@ -8,14 +8,9 @@ import ArticlesPage from "../pages/articles/ArticlesPage";
 import FeedArticlesPage from "../pages/articles/FeedArticlesPage";
 import ArticlePage from "../pages/articles/ArticlePage";
 import NewArticlePage from "../pages/articles/NewArticlePage";
-import { CurrentUserContext } from "../context/currentUserContext";
 import ProtectedRoute from "./protectedRoute";
 
 const PageRoutes = () => {
-  const [{ currentUser }] = useContext(CurrentUserContext);
-
-  const isUser = !!currentUser;
-
   const redirectToLogin = "/login";
 
   return (
@@ -27,18 +22,20 @@ const PageRoutes = () => {
       </Route>
 
       <Route path={"/article"}>
-        <ProtectedRoute access={isUser} redirect={redirectToLogin}>
+        <Route element={<ProtectedRoute redirect={redirectToLogin} />}>
           <Route path={"new"} element={<NewArticlePage />} />
-          {/*<Route path={"edit/:slug"} element={<EditArticlePage />} />*/}
-        </ProtectedRoute>
+        </Route>
+
+        {/*<Route path={"edit/:slug"} element={<EditArticlePage />} />*/}
+
         <Route path={":slug"} element={<ArticlePage />} />
       </Route>
 
-      <ProtectedRoute access={isUser} redirect={redirectToLogin}>
+      <Route element={<ProtectedRoute redirect={redirectToLogin} />}>
         <Route path={"feed"} element={<FeedArticlesPage />}>
           <Route path={":page"} element={<FeedArticlesPage />} />
         </Route>
-      </ProtectedRoute>
+      </Route>
 
       <Route path={"tags/:tag"} element={<TagArticlesPage />}>
         <Route path={":page"} element={<TagArticlesPage />} />
@@ -48,10 +45,8 @@ const PageRoutes = () => {
         <Route path={":username"} element={<UserPage />} />
       </Route>
 
-      <ProtectedRoute access={!isUser}>
-        <Route path={"login"} element={<SignInPage />} />
-        <Route path={"register"} element={<SignUpPage />} />
-      </ProtectedRoute>
+      <Route path={"login"} element={<SignInPage />} />
+      <Route path={"register"} element={<SignUpPage />} />
     </Routes>
   );
 };

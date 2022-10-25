@@ -1,20 +1,15 @@
-import React, { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { CurrentUserContext } from "../context/currentUserContext";
 
-const ProtectedRoute = ({
-  access,
-  redirect = "/",
-  children,
-}: {
-  access: boolean;
-  redirect?: string;
-  children: ReactNode;
-}) => {
-  if (!access) {
+const ProtectedRoute = ({ redirect = "/" }: { redirect?: string }) => {
+  const [{ currentUser }] = useContext(CurrentUserContext);
+
+  if (!currentUser) {
     return <Navigate to={redirect} />;
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 };
 
 export default ProtectedRoute;
