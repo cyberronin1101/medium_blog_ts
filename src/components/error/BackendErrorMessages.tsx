@@ -1,6 +1,12 @@
 import { apiBackendErrorsType } from "../../services/apiService/apiServiceTypes";
 
-const BackendErrorMessages = ({ errors }: apiBackendErrorsType) => {
+const BackendErrorMessages = ({
+  errors,
+}: {
+  errors: apiBackendErrorsType | undefined;
+}) => {
+  if (!errors) return null;
+
   return (
     <ul className={"error-messages"}>
       {Object.keys(errors).map((name, idx) => {

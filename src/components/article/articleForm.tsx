@@ -8,12 +8,17 @@ import {
 
 const ArticleForm = ({
   onSubmit = () => {},
-  errors = {},
-  initialValue = {} as apiEditArticleType,
+  errors,
+  initialValue = {
+    title: "",
+    description: "",
+    body: "",
+    tagList: [],
+  },
   submitTitle = "",
 }: {
-  onSubmit: Function;
-  errors?: apiBackendErrorsType["errors"];
+  onSubmit: (data: apiEditArticleType) => void;
+  errors?: apiBackendErrorsType;
   initialValue?: apiEditArticleType;
   submitTitle?: string;
 }) => {
@@ -30,7 +35,12 @@ const ArticleForm = ({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit();
+    onSubmit({
+      title: titleInput.value,
+      description: descriptionInput.value,
+      body: bodyInput.value,
+      tagList: tagListInput.value.split(" "),
+    });
   };
 
   return (

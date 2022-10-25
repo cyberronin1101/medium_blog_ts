@@ -2,27 +2,26 @@ import { AxiosRequestConfig, AxiosResponse } from "axios";
 
 export type apiErrorType = {
   code?: string;
-  response?: AxiosResponse;
+  response?: AxiosResponse<apiBackendErrorsTypeData>;
   message: string;
 };
 
+export type apiBackendErrorsTypeData = {
+  errors: apiBackendErrorsType;
+};
 export type apiBackendErrorsType = {
-  errors: { [key: string]: string[] };
+  [key: string]: string[];
 };
 
 export type apiUserSignInType = {
-  user: {
-    email: string;
-    password: string;
-  };
+  email: string;
+  password: string;
 };
 
 export type apiUserSignUpType = {
-  user: {
-    username: string;
-    email: string;
-    password: string;
-  };
+  username: string;
+  email: string;
+  password: string;
 };
 
 export type apiUserType = {
@@ -88,7 +87,7 @@ export type getType<respType, options = string> = (
 ) => Promise<AxiosResponse<respType>>;
 
 export type postType<respType, dataType> = (
-  data: AxiosRequestConfig<dataType>
+  item: dataType
 ) => Promise<AxiosResponse<respType>>;
 
 export type fetcherType = <respType>(

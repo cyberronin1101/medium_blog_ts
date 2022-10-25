@@ -36,12 +36,10 @@ const SignInPage = () => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    const user = {
+    auth({
       email: emailInput.value,
       password: passwordInput.value,
-    };
-
-    auth({ data: { user } });
+    });
   };
 
   if (currentUser.currentUser) {
@@ -58,7 +56,7 @@ const SignInPage = () => {
             </p>
 
             {error &&
-              (error?.response?.data ? (
+              (error?.response?.data.errors ? (
                 <BackendErrorMessages errors={error.response.data.errors} />
               ) : (
                 <ErrorMessage error={error} />

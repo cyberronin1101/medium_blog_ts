@@ -42,55 +42,43 @@ const fetcher: fetcherType = (url, data = {}) => {
 };
 
 class ApiService {
-  static getTag: getType<apiTagsResponseType> = () => {
-    return fetcher("/tags");
-  };
+  static getTag: getType<apiTagsResponseType> = () => fetcher("/tags");
 
-  static getUser: getType<apiUserResponseType> = () => {
-    return fetcher("/user");
-  };
+  static getUser: getType<apiUserResponseType> = () => fetcher("/user");
 
-  static getArticles: getType<apiArticlesResponseType> = (params) => {
-    return fetcher(joinParams("/articles", params));
-  };
+  static getArticles: getType<apiArticlesResponseType> = (params) =>
+    fetcher(joinParams("/articles", params));
 
-  static getArticle: getTypeRequire<apiArticleResponseType, string> = (
-    slug: string
-  ) => {
-    return fetcher("/articles/" + slug);
-  };
+  static getArticle: getTypeRequire<apiArticleResponseType> = (slug) =>
+    fetcher("/articles/" + slug);
 
   static createArticle: postType<apiArticleResponseType, apiEditArticleType> = (
-    data
-  ) => {
-    data.method = "post";
-    return fetcher("/articles", data);
-  };
+    article
+  ) =>
+    fetcher("/articles", {
+      method: "post",
+      data: { article },
+    });
 
-  static getFeedArticles: getType<apiArticlesResponseType> = (params) => {
-    return fetcher(joinParams("/articles/feed", params));
-  };
+  static getFeedArticles: getType<apiArticlesResponseType> = (params) =>
+    fetcher(joinParams("/articles/feed", params));
 
-  static signIn: postType<apiUserResponseType, apiUserSignInType> = async (
-    data
-  ) => {
-    data.method = "post";
-    return await fetcher("/users/login", data);
-  };
+  static signIn: postType<apiUserResponseType, apiUserSignInType> = (user) =>
+    fetcher("/users/login", {
+      method: "post",
+      data: { user },
+    });
 
-  static signUp: postType<apiUserResponseType, apiUserSignUpType> = async (
-    data
-  ) => {
-    data.method = "post";
-    return await fetcher("/users", data);
-  };
+  static signUp: postType<apiUserResponseType, apiUserSignUpType> = (user) =>
+    fetcher("/users", {
+      method: "post",
+      data: { user },
+    });
 
-  static helperLimitOffset = (page: number = 1, limit = BASE_LIMIT) => {
-    return {
-      limit,
-      offset: (page - 1) * limit,
-    };
-  };
+  static helperLimitOffset = (page: number = 1, limit = BASE_LIMIT) => ({
+    limit,
+    offset: (page - 1) * limit,
+  });
 
   static helperObjToParams = (
     object: { [key: string]: true | string | number } = {}

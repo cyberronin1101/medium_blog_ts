@@ -1,6 +1,9 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useCallback, useState } from "react";
-import { apiErrorType } from "../services/apiService/apiServiceTypes";
+import {
+  apiBackendErrorsTypeData,
+  apiErrorType,
+} from "../services/apiService/apiServiceTypes";
 
 type useFetchType = <T, A, Params extends A[]>(
   cb: (...args: Params) => Promise<AxiosResponse<T>>
@@ -27,14 +30,20 @@ export const useFetch: useFetchType = <T, A, Params extends A[]>(
           setResponse(res.data);
           setLoading(false);
         })
-        .catch(({ message, code, response }: AxiosError) => {
-          setLoading(false);
-          setError({
+        .catch(
+          ({
             message,
             code,
             response,
-          });
-        });
+          }: AxiosError<apiBackendErrorsTypeData>) => {
+            setLoading(false);
+            setError({
+              message,
+              code,
+              response,
+            });
+          }
+        );
     },
     [cb]
   );

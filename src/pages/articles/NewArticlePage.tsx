@@ -3,10 +3,11 @@ import { CurrentTitleContext } from "../../context/titleContext";
 import ArticleForm from "../../components/article/articleForm";
 import { useFetch } from "../../hooks/useFetch";
 import ApiService from "../../services/apiService/apiService";
+import { apiEditArticleType } from "../../services/apiService/apiServiceTypes";
 
 const NewArticlePage = () => {
   const [, setTitle] = useContext(CurrentTitleContext);
-  const [{ response, loading, error }, doFetch] = useFetch(
+  const [{ response, loading, error }, createArticle] = useFetch(
     ApiService.createArticle
   );
 
@@ -16,19 +17,15 @@ const NewArticlePage = () => {
     });
   }, [setTitle]);
 
-  const onSubmit = () => {
-    // doFetch({
-    //   data: {},
-    // } as { data: articleTypeEdit });
+  const onSubmit = (article: apiEditArticleType) => {
+    createArticle(article);
   };
-
-  const errors = {};
 
   return (
     <div>
       <ArticleForm
         onSubmit={onSubmit}
-        errors={errors}
+        errors={error?.response?.data.errors}
         submitTitle={"Publish Article"}
       />
     </div>

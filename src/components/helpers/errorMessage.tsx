@@ -1,12 +1,16 @@
 import { apiErrorType } from "../../services/apiService/apiServiceTypes";
 
-const ErrorMessage = (props: { error?: apiErrorType }) => {
-  const { error } = props;
-
+const ErrorMessage = ({ error }: { error: apiErrorType | string }) => {
   let message = "Something went wrong";
 
-  if (error?.message) {
-    message = error.message;
+  if (typeof error === "string" && error) {
+    message = error;
+  }
+
+  if (typeof error === "object") {
+    if (error?.message) {
+      message = error.message;
+    }
   }
 
   return (
