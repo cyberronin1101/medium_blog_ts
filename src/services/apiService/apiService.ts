@@ -11,6 +11,7 @@ import {
   getType,
   getTypeRequire,
   postType,
+  postTypeRequire,
 } from "./apiServiceTypes";
 
 const BASE_URL = "https://conduit.productionready.io/api";
@@ -57,6 +58,16 @@ class ApiService {
   ) =>
     fetcher("/articles", {
       method: "post",
+      data: { article },
+    });
+
+  static editArticle: postTypeRequire<
+    apiArticleResponseType,
+    apiEditArticleType,
+    string
+  > = (article, slug) =>
+    fetcher("/articles/" + slug, {
+      method: "put",
       data: { article },
     });
 

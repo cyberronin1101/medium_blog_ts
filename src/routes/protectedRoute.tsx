@@ -3,9 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import { CurrentUserContext } from "../context/currentUserContext";
 
 const ProtectedRoute = ({ redirect = "/" }: { redirect?: string }) => {
-  const [{ currentUser }] = useContext(CurrentUserContext);
+  const [currentUser] = useContext(CurrentUserContext);
 
-  if (!currentUser) {
+  if (!currentUser.isLoggedIn && !currentUser.isLoading) {
     return <Navigate to={redirect} />;
   }
 

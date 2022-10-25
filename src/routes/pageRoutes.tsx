@@ -9,6 +9,7 @@ import FeedArticlesPage from "../pages/articles/FeedArticlesPage";
 import ArticlePage from "../pages/articles/ArticlePage";
 import NewArticlePage from "../pages/articles/NewArticlePage";
 import ProtectedRoute from "./protectedRoute";
+import EditArticlePage from "../pages/articles/EditArticlePage";
 
 const PageRoutes = () => {
   const redirectToLogin = "/login";
@@ -26,9 +27,12 @@ const PageRoutes = () => {
           <Route path={"new"} element={<NewArticlePage />} />
         </Route>
 
-        {/*<Route path={"edit/:slug"} element={<EditArticlePage />} />*/}
-
-        <Route path={":slug"} element={<ArticlePage />} />
+        <Route path={":slug"}>
+          <Route index element={<ArticlePage />} />
+          <Route element={<ProtectedRoute redirect={redirectToLogin} />}>
+            <Route path={"edit"} element={<EditArticlePage />} />
+          </Route>
+        </Route>
       </Route>
 
       <Route element={<ProtectedRoute redirect={redirectToLogin} />}>

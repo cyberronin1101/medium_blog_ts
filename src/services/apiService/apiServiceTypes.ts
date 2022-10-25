@@ -80,6 +80,11 @@ export type getType<respType, options = string> = (
   options?: options
 ) => Promise<AxiosResponse<respType>>;
 
+export type postTypeRequire<respType, dataType, options> = (
+  item: dataType,
+  options: options
+) => Promise<AxiosResponse<respType>>;
+
 export type postType<respType, dataType> = (
   item: dataType
 ) => Promise<AxiosResponse<respType>>;
