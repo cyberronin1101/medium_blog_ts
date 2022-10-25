@@ -9,6 +9,7 @@ import {
 const ArticleForm = ({
   onSubmit = () => {},
   errors,
+  loading = false,
   initialValue = {
     title: "",
     description: "",
@@ -19,6 +20,7 @@ const ArticleForm = ({
 }: {
   onSubmit: (data: apiEditArticleType) => void;
   errors?: apiBackendErrorsType;
+  loading?: boolean;
   initialValue?: apiEditArticleType;
   submitTitle?: string;
 }) => {
@@ -86,6 +88,7 @@ const ArticleForm = ({
             <button
               type={"submit"}
               className={"btn btn-lg pull-xs-right btn-primary"}
+              disabled={loading}
             >
               {submitTitle || "Publish Article"}
             </button>

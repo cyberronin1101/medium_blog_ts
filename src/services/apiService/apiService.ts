@@ -75,6 +75,8 @@ class ApiService {
       data: { user },
     });
 
+  // HELPERS
+
   static helperLimitOffset = (page: number = 1, limit = BASE_LIMIT) => ({
     limit,
     offset: (page - 1) * limit,

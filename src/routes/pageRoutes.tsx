@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { useContext } from "react";
 import TagArticlesPage from "../pages/articles/TagArticlesPage";
 import UserPage from "../pages/auth/userPage";
 import SignInPage from "../pages/auth/signInPage";
@@ -8,9 +8,16 @@ import ArticlesPage from "../pages/articles/ArticlesPage";
 import FeedArticlesPage from "../pages/articles/FeedArticlesPage";
 import ArticlePage from "../pages/articles/ArticlePage";
 import NewArticlePage from "../pages/articles/NewArticlePage";
-// import EditArticlePage from "../pages/articles/EditArticlePage";
+import { CurrentUserContext } from "../context/currentUserContext";
+import ProtectedRoute from "./protectedRoute";
 
 const PageRoutes = () => {
+  const [{ currentUser }] = useContext(CurrentUserContext);
+
+  const isUser = !!currentUser;
+
+  const redirectToLogin = "/login";
+
   return (
     <Routes>
       <Route path={"/"} element={<Navigate to={"/articles"} />} />
@@ -20,14 +27,18 @@ const PageRoutes = () => {
       </Route>
 
       <Route path={"/article"}>
-        <Route path={"new"} element={<NewArticlePage />} />
-        {/*<Route path={"edit/:slug"} element={<EditArticlePage />} />*/}
+        <ProtectedRoute access={isUser} redirect={redirectToLogin}>
+          <Route path={"new"} element={<NewArticlePage />} />
+          {/*<Route path={"edit/:slug"} element={<EditArticlePage />} />*/}
+        </ProtectedRoute>
         <Route path={":slug"} element={<ArticlePage />} />
       </Route>
 
-      <Route path={"feed"} element={<FeedArticlesPage />}>
-        <Route path={":page"} element={<FeedArticlesPage />} />
-      </Route>
+      <ProtectedRoute access={isUser} redirect={redirectToLogin}>
+        <Route path={"feed"} element={<FeedArticlesPage />}>
+          <Route path={":page"} element={<FeedArticlesPage />} />
+        </Route>
+      </ProtectedRoute>
 
       <Route path={"tags/:tag"} element={<TagArticlesPage />}>
         <Route path={":page"} element={<TagArticlesPage />} />
@@ -37,8 +48,10 @@ const PageRoutes = () => {
         <Route path={":username"} element={<UserPage />} />
       </Route>
 
-      <Route path={"login"} element={<SignInPage />} />
-      <Route path={"register"} element={<SignUpPage />} />
+      <ProtectedRoute access={!isUser}>
+        <Route path={"login"} element={<SignInPage />} />
+        <Route path={"register"} element={<SignUpPage />} />
+      </ProtectedRoute>
     </Routes>
   );
 };

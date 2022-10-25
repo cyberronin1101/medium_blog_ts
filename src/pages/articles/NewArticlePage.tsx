@@ -3,7 +3,7 @@ import { CurrentTitleContext } from "../../context/titleContext";
 import ArticleForm from "../../components/article/articleForm";
 import { useFetch } from "../../hooks/useFetch";
 import ApiService from "../../services/apiService/apiService";
-import { apiEditArticleType } from "../../services/apiService/apiServiceTypes";
+import { Navigate } from "react-router-dom";
 
 const NewArticlePage = () => {
   const [, setTitle] = useContext(CurrentTitleContext);
@@ -17,14 +17,15 @@ const NewArticlePage = () => {
     });
   }, [setTitle]);
 
-  const onSubmit = (article: apiEditArticleType) => {
-    createArticle(article);
-  };
+  if (response) {
+    return <Navigate to={"/article/" + response.article.slug} />;
+  }
 
   return (
     <div>
       <ArticleForm
-        onSubmit={onSubmit}
+        onSubmit={createArticle}
+        loading={loading}
         errors={error?.response?.data.errors}
         submitTitle={"Publish Article"}
       />
