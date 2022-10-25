@@ -34,14 +34,15 @@ const EditArticlePage = () => {
   useEffect(() => {
     if (!response) return () => {};
 
+    const { article } = response;
     setTitle({
-      title: "Edit " + response.article.title,
+      title: "Edit " + article.title,
       meta: {
         user: {
-          username: response.article.author.username,
-          image: response.article.author.image,
+          username: article.author.username,
+          image: article.author.image,
         },
-        date: response.article.createdAt,
+        date: article.createdAt,
       },
     });
   }, [response, setTitle]);
@@ -50,7 +51,11 @@ const EditArticlePage = () => {
     throw new Error("Slug can by empty");
   }
 
-  if (currentUser.currentUser?.username !== response?.article.author.username) {
+  if (
+    currentUser.currentUser?.username &&
+    response?.article.author.username &&
+    currentUser.currentUser?.username !== response?.article.author.username
+  ) {
     return <Navigate to={"/article/" + slug} />;
   }
 

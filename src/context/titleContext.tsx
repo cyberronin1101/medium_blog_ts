@@ -6,6 +6,7 @@ type titleType = {
   meta?: {
     user?: { username: string; image: string };
     date?: string;
+    ext?: JSX.Element;
   };
 };
 

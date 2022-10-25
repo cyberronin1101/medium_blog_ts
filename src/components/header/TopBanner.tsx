@@ -30,6 +30,7 @@ const TopBanner = (): JSX.Element => {
               </Link>
               {meta.date && <span className={"date"}>{meta.date}</span>}
             </div>
+            {meta.ext && meta.ext}
           </div>
         )}
         {description && <p>{description}</p>}
