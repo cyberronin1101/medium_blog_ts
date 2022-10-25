@@ -10,6 +10,8 @@ import ArticlePage from "../pages/articles/ArticlePage";
 import NewArticlePage from "../pages/articles/NewArticlePage";
 import ProtectedRoute from "./protectedRoute";
 import EditArticlePage from "../pages/articles/EditArticlePage";
+import UserSettingsPage from "../pages/auth/userSettingsPage";
+import Error404 from "../pages/Error404";
 
 const PageRoutes = () => {
   const redirectToLogin = "/login";
@@ -49,8 +51,14 @@ const PageRoutes = () => {
         <Route path={":username"} element={<UserPage />} />
       </Route>
 
+      <Route element={<ProtectedRoute redirect={redirectToLogin} />}>
+        <Route path={"settings"} element={<UserSettingsPage />} />
+      </Route>
+
       <Route path={"login"} element={<SignInPage />} />
       <Route path={"register"} element={<SignUpPage />} />
+
+      <Route path={"*"} element={<Error404 />} />
     </Routes>
   );
 };

@@ -2,10 +2,17 @@ import { useState } from "react";
 import { ChangeEvent } from "react";
 
 const useInput = (val = "") => {
+  if (!val) {
+    val = "";
+  }
   const [value, setValue] = useState(val);
 
   const onChange = (e: ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) => {
-    setValue(e.target.value);
+    let value = e.target.value;
+    if (!value) {
+      value = "";
+    }
+    setValue(value);
   };
 
   return {

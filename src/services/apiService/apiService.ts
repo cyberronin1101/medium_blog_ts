@@ -7,12 +7,14 @@ import {
   apiUserResponseType,
   apiUserSignInType,
   apiUserSignUpType,
+  apiUserType,
   deleteType,
   fetcherType,
   getType,
   getTypeRequire,
   postType,
   putType,
+  putTypeBySlug,
 } from "./apiServiceTypes";
 
 const BASE_URL = "https://conduit.productionready.io/api";
@@ -62,10 +64,10 @@ class ApiService {
       data: { article },
     });
 
-  static editArticle: putType<apiArticleResponseType, apiEditArticleType> = (
-    article,
-    slug
-  ) =>
+  static editArticle: putTypeBySlug<
+    apiArticleResponseType,
+    apiEditArticleType
+  > = (article, slug) =>
     fetcher("/articles/" + slug, {
       method: "put",
       data: { article },
@@ -88,6 +90,12 @@ class ApiService {
   static signUp: postType<apiUserResponseType, apiUserSignUpType> = (user) =>
     fetcher("/users", {
       method: "post",
+      data: { user },
+    });
+
+  static userSave: putType<apiUserResponseType, apiUserType> = (user) =>
+    fetcher("/user", {
+      method: "put",
       data: { user },
     });
 

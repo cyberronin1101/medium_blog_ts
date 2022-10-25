@@ -30,6 +30,7 @@ export type apiUserType = {
   image: string;
   token?: string;
   username: string;
+  password?: string;
 };
 
 export type apiAuthorType = {
@@ -80,7 +81,11 @@ export type getType<respType, options = string> = (
   options?: options
 ) => Promise<AxiosResponse<respType>>;
 
-export type putType<respType, dataType, options = string> = (
+export type putType<respType, dataType> = (
+  item: dataType
+) => Promise<AxiosResponse<respType>>;
+
+export type putTypeBySlug<respType, dataType, options = string> = (
   item: dataType,
   options: options
 ) => Promise<AxiosResponse<respType>>;
