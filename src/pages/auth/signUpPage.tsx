@@ -34,18 +34,14 @@ const SignUpPage = () => {
 
   useOnLogin(response);
 
-  console.log(error);
-
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    const user = {
+    auth({
       email: emailInput.value,
       password: passwordInput.value,
       username: usernameInput.value,
-    };
-
-    auth({ data: { user } });
+    });
   };
 
   if (currentUser.currentUser) {
@@ -62,7 +58,7 @@ const SignUpPage = () => {
             </p>
 
             {error &&
-              (error?.response?.data ? (
+              (error?.response?.data.errors ? (
                 <BackendErrorMessages errors={error.response.data.errors} />
               ) : (
                 <ErrorMessage error={error} />

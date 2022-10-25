@@ -8,7 +8,7 @@ import ApiService from "../../services/apiService/apiService";
 const PopularTagContainer = (): JSX.Element => {
   const [fetchState, doFetch] = useFetch(ApiService.getTag);
 
-  let tags = fetchState.response?.tags;
+  const tags = fetchState.response?.tags;
 
   useEffect(() => {
     doFetch();
