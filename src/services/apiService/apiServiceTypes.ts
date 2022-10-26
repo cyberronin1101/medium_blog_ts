@@ -53,6 +53,8 @@ export type apiArticleType = {
   slug: string;
   tagList: string[];
   createdAt: string;
+  favorited: boolean;
+  favoritesCount: number;
 };
 
 export type apiUserResponseType = {
@@ -92,6 +94,11 @@ export type putTypeBySlug<respType, dataType, options = string> = (
 
 export type deleteType<respType = "", options = string> = (
   options: options
+) => Promise<AxiosResponse<respType>>;
+
+export type togglerFavoriteType<respType, slug = string> = (
+  slug: slug,
+  isFavorite: boolean
 ) => Promise<AxiosResponse<respType>>;
 
 export type postType<respType, dataType> = (

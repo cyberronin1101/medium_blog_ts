@@ -15,6 +15,7 @@ import {
   postType,
   putType,
   putTypeBySlug,
+  togglerFavoriteType,
 } from "./apiServiceTypes";
 
 const BASE_URL = "https://conduit.productionready.io/api";
@@ -71,6 +72,14 @@ class ApiService {
     fetcher("/articles/" + slug, {
       method: "put",
       data: { article },
+    });
+
+  static articleToggleFavorite: togglerFavoriteType<apiArticleResponseType> = (
+    slug,
+    isFavorite
+  ) =>
+    fetcher("/articles/" + slug + "/favorite", {
+      method: isFavorite ? "delete" : "post",
     });
 
   static deleteArticle: deleteType = (slug) =>

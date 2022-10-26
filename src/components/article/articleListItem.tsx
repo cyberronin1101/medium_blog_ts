@@ -1,22 +1,42 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import TagList from "../tags/tagList";
+import AddToFavorite from "../favorite/addToFavorite";
+import { apiArticleType } from "../../services/apiService/apiServiceTypes";
+import { useFetch } from "../../hooks/useFetch";
+import ApiService from "../../services/apiService/apiService";
+import { useContext, useEffect, useState } from "react";
+import { CurrentUserContext } from "../../context/currentUserContext";
 
-type authorType = {
-  username: string;
-  image: string;
-};
-type feedType = {
-  author: authorType;
-  body: string;
-  title: string;
-  description: string;
-  slug: string;
-  tagList: string[];
-  createdAt: string;
-};
+const ArticleListItem = (props: { article: apiArticleType }) => {
+  const [article, setArticle] = useState(props.article);
+  const [redirect, setRedirect] = useState(false);
+  const [currentUser] = useContext(CurrentUserContext);
 
-const ArticleListItem = (props: { article: feedType }) => {
-  const { article } = props;
+  const [{ response, loading }, articleToggleFavorite] = useFetch(
+    ApiService.articleToggleFavorite
+  );
+
+  useEffect(() => {
+    setArticle(props.article);
+  }, [props.article]);
+
+  useEffect(() => {
+    if (!response) return;
+
+    setArticle(response.article);
+  }, [response, setArticle]);
+
+  const toggleFavorite = () => {
+    if (!currentUser.isLoggedIn) {
+      setRedirect(true);
+      return;
+    }
+    articleToggleFavorite(article.slug, article.favorited);
+  };
+
+  if (redirect) {
+    return <Navigate to={"/login"} />;
+  }
 
   return (
     <div className={"article-preview"}>
@@ -33,7 +53,18 @@ const ArticleListItem = (props: { article: feedType }) => {
           </Link>
           <span className={"date"}>{article.createdAt}</span>
         </div>
+        <div className={"pull-xs-right"}>
+          <AddToFavorite
+            {...{
+              isFavorite: article.favorited,
+              favoriteCount: article.favoritesCount,
+              isLoading: loading,
+              favoriteToggler: toggleFavorite,
+            }}
+          />
+        </div>
       </div>
+
       <Link to={`/article/${article.slug}`} className={"preview-link"}>
         <h1
           style={{
